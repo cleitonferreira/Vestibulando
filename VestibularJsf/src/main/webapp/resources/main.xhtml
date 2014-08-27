@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      ><!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
+
+    <h:head>
+        <title>VeiculoJsf - Sistema JSF e Maven</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link href="./../resources/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/imagens/favicon.png" rel="shortcut icon" type="image/x-icon" />
+        <link href="./../../resources/imagens/favicon.png" rel="shortcut icon" type="image/x-icon" />
+        <link href="./../../resources/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="./../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="./../bootstrap/js/bootstrap.js" type="text/javascript" />
+        <!--   Import Bootstrap Consulta   -->
+        <link href="./../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="./../../bootstrap/js/bootstrap.js" type="text/javascript" />
+        <!--<link href="../../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />-->
+        <link href="../bootstrap/js/jquery-2.1.1.js" />
+
+    </h:head>
+
+    <h:body>
+
+        <div id="topo">
+            <a href="http://www.veiculojsf.com.br/">
+                <div id="logotipo"></div>
+            </a>
+
+            <div id="logoff" style="text-align: right;">
+                <br/>
+                <h5 style="text-align: right; color: white;margin-top: 20px; font-size: 10px;">
+                    <h:outputText value="SEJA BEM VINDO(A)!!!" />
+                </h5>
+
+                <br/>
+                <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                    <button class="btn btn-mini" type="button">Desconectar</button>
+                </a>
+
+                <!--                <button class="btn btn-mini" type="button">Botão miniatura</button>
+                                <h:commandButton class="btn btn-mini" value="Acessar">
+                                </h:commandButton>-->
+            </div>
+
+
+        </div>  
+
+
+        <div style="float: right; margin-top: -125px;"><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></div>
+
+
+        <div id="menu"><!-- Menu ########################################## Menu-->
+            <h:form>    
+                <p:menubar styleClass="labelmenu">
+
+                    <p:menuitem  value="Home" url="/restrict/home.faces"/>
+                    <p:submenu label="Cadastros">
+                        <p:menuitem  value="Setores" url="/restrict/cadastros/cadastrarsetor.faces"/>
+                        <p:menuitem  value="Usuarios" url="/restrict/cadastros/cadastrarusuario.faces"/>
+                        <p:menuitem  value="Paises" url="/restrict/cadastros/cadastrarpais.faces"/>
+                        <p:menuitem  value="Estados" url="/restrict/cadastros/cadastrarestado.faces"/>
+                        <p:menuitem  value="Cidades" url="/restrict/cadastros/cadastrarcidade.faces"/>
+                    </p:submenu> 
+                    <p:submenu label="Consultas">
+                        <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
+                        <p:menuitem value="Usuarios" url="/restrict/consultas/consultarusuarios.faces"/>
+                        <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
+                        <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
+                        <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
+                    </p:submenu>
+                    <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
+
+                </p:menubar> 
+            </h:form>           
+        </div>
+
+        <div id="tarefas">
+            <ui:insert name="tarefas"></ui:insert>
+        </div>
+
+
+    </h:body>
+
+    <p:dialog header="Equipe" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="500">
+        <h4 style="color: #0174df; text-align: center;">FAA - Funda&ccedil;&atilde;o Educacional D. Andr&eacute; Arcoverde</h4>
+        <h4 style="color: #0174df; text-align: center;">Centro de Ensino Superior de Valen&ccedil;a</h4>
+
+        <center>
+            <p:column colspan="2">  
+                <p:graphicImage url="../resources/imagens/Analise_Sistemas.png" />  
+            </p:column>  
+            <p:column colspan="2">  
+                <p:graphicImage url="../../resources/imagens/Analise_Sistemas.png" />  
+            </p:column>  
+        </center>
+        <br /><br />
+        <p style="color: #0174df; font-weight: bold;"><small>Desenvolvido pelo Nucleo de Tecnologia da Informa&ccedil;&atilde;o</small></p>
+        <p style="color: #0174df; font-weight: bold;"><small>Tel: (24) 2453-1888</small></p>
+        <p style="color: #0174df; font-weight: bold;"><small>Ramal: 0789</small></p>
+        <br />
+
+    </p:dialog>
+
+
+</html>
+
