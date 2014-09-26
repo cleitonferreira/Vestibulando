@@ -70,6 +70,7 @@ public class MbSetor implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
     private void updateSetor() {
@@ -83,6 +84,7 @@ public class MbSetor implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
     public void deleteSetor() {
@@ -90,14 +92,12 @@ public class MbSetor implements Serializable {
             setorDAO().remove(setor);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso", ""));
-            limpSetor();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Excluir], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
-
     }
 
     public List<Setor> getSetores() {

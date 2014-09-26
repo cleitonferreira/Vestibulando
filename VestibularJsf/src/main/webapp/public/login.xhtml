@@ -11,8 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <link href="./resources/restrict/css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./resources/restrict/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="bootstrap/js/bootstrap.js" type="text/javascript" />
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../bootstrap/js/bootstrap.js" type="text/javascript" />
         <!--        <link href="public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />-->
         <title>Login</title>
     </h:head>
@@ -20,12 +20,12 @@
 
         <div id="topo">
             <div id="logotipo">
-                <img src="public/images/logo_1600_200.png" class="img-rounded"> </img>
+                <img src="img/logo_1600_200.png" class="img-rounded"/>
             </div>
         </div> 
 
         <p>
-            <img style="margin-top: 0.5%;" src="public/images/tela_marcas_preto_branco.png" class="img-rounded"> </img>
+            <img style="margin-top: 0.5%;" src="img/tela_marcas_preto_branco.png" class="img-rounded"/>
         </p>
 
 
@@ -50,7 +50,7 @@
 
 
                 <br />
-                <form action="j_spring_security_check" method="post" id="login">
+                <form action="../j_spring_security_check" method="post" id="login">
                     <h:panelGrid columns="2" cellpadding="3">
                         <h:outputLabel for="j_username" value="Usu&aacute;rio: " /> 
                         <h:inputText id="j_username" required="true"/>

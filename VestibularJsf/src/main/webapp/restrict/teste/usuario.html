@@ -15,12 +15,12 @@
                 PrimeFaces.locales['pt'] = {
                     closeText: 'Fechar',
                     prevText: 'Anterior',
-                    nextText: 'Pr&oacute;ximo',
+                    nextText: 'Próximo',
                     currentText: 'Começo',
                     monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                     monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'S&aacute;bado'],
-                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b'],
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
                     dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
                     weekHeader: 'Semana',
                     firstDay: 1,
@@ -34,7 +34,7 @@
                     secondText: 'Segundo',
                     currentText: 'Data Atual',
                             ampm: false,
-                    month: 'M&ecirc;s',
+                    month: 'Mês',
                     week: 'Semana',
                     day: 'Dia',
                     allDayText: 'Todo Dia'
@@ -73,7 +73,7 @@
                                                  requiredMessage="O campo [Usu&aacute;rio] &eacute; obrigat&oacute;rio."/>
 
                                     <p:outputLabel value="CPF.:"/>
-                                    <p:inputMask id="cpf" size="40" maxlength="14" mask="999.999.999-99" value="#{mbUsuario.usuario.usu_cpf}"
+                                    <p:inputMask id="cpf" size="40" maxlength="14" mask="999.999.999-99" value="#{mbPessoa.pessoa.pes_cpf}"
                                                  disabled="#{mbUsuario.usuario.usu_cpf != null}" required="true" requiredMessage="O campo [CPF] &eacute; obrigat&oacute;rio">
                                         <f:validator validatorId="validators.CPFValidator"/> 
                                         <f:converter converterId="converter.CpfConverter" />
@@ -89,7 +89,7 @@
                                     <p:inputMask id="usu_tel" size="40" maxlength="14" mask="(99) 9999-9999" value="#{mbUsuario.usuario.usu_tel}" />
 
                                     <p:outputLabel value="Celular.:"/>
-                                    <p:inputMask id="usu_cel" size="40" maxlength="15" mask="(99) 99999-999?9" value="#{mbUsuario.usuario.usu_cel}" />
+                                    <p:inputMask id="usu_cel" size="40" maxlength="15" mask="(99) 99999-9999" value="#{mbUsuario.usuario.usu_cel}" />
 
 
                                     <p:outputLabel value="Data de Nascimento:" />
@@ -103,19 +103,17 @@
                                         <f:validator validatorId="emailValidator"/>
                                     </p:inputText>
 
+                                    <p:outputLabel value="Senha.:"/>
+                                    <p:password id="usu_senha" size="40" maxlength="40" value="#{mbUsuario.usuario.usu_senha}"
+                                                required="true" requiredMessage="O campo [Senha] &eacute; obrigat&oacute;rio." feedback="true" 
+                                                promptLabel="Por favor, digite a senha!!!" weakLabel="Fraco"  
+                                                goodLabel="M&eacute;dio" strongLabel="Forte" />
 
                                     <p:outputLabel value="Permiss&atilde;o:" />
                                     <p:selectOneMenu id="console" value="#{mbUsuario.usuario.usu_permissao}">
                                         <f:selectItem itemLabel="Usu&aacute;rio" itemValue="ROLE_USER" />
                                         <f:selectItem itemLabel="Administrador" itemValue="ROLE_ADMIN" />
                                     </p:selectOneMenu>
-
-
-                                    <p:outputLabel value="Senha.:"/>
-                                    <p:password id="usu_senha" size="40" maxlength="40" value="#{mbUsuario.usuario.usu_senha}"
-                                                required="true" requiredMessage="O campo [Senha] &eacute; obrigat&oacute;rio." feedback="true" 
-                                                promptLabel="Por favor, digite a senha!!!" weakLabel="Fraco"  
-                                                goodLabel="M&eacute;dio" strongLabel="Forte" />
 
 
                                 </h:panelGrid>
@@ -146,21 +144,25 @@
                     <p:column headerText="Id" filterBy="#{usuario.usu_id}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{usuario.usu_id}"/>
                     </p:column>
-                    <p:column headerText="Setor" filterBy="#{usuario.setor.set_nome}"  footerText="contains" filterMatchMode="contains">
-                        <h:outputText value="#{usuario.setor.set_nome}"/>
-                    </p:column>
                     <p:column headerText="Usu&aacute;rio" filterBy="#{usuario.usu_nome}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{usuario.usu_nome}"/>
                     </p:column>
                     <p:column headerText="Email" filterBy="#{usuario.usu_email}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{usuario.usu_email}"/>
                     </p:column>
+                    <p:column headerText="Permiss&atilde;o" filterBy="#{usuario.usu_permissao}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{usuario.usu_permissao}"/>
+                    </p:column>
                     <p:column headerText="Tel" filterBy="#{usuario.usu_tel}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{usuario.usu_tel}"/>
                     </p:column>
-                    <p:column headerText="Cel" filterBy="#{usuario.usu_cel}"  footerText="contains" filterMatchMode="contains">
+                    <p:column headerText="Tel" filterBy="#{usuario.usu_cel}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{usuario.usu_cel}"/>
                     </p:column>
+                    <p:column headerText="Setor" filterBy="#{usuario.setor.set_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{usuario.setor.set_nome}"/>
+                    </p:column>
+
                     <p:column style="width: 15%; text-align: center;">
                         <f:facet name="header">
                             <h:outputText value="A&ccedil;&otilde;es"/>

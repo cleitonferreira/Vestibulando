@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../../resources/main.xhtml">
+
+    <ui:define name="tarefas">
+        <p:fieldset>
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Formul&aacute;rio de Cadastro [Curso]">
+                    <h:form prependId="false" id="formCurso">
+
+                        <p:commandButton value="Novo Registro" action="#{mbCurso.limpCurso}" onclick="PF('viewCurso').show();" 
+                                         type="button" styleClass="" icon="ui-icon-extlink" />
+
+                        <p:button style="margin-left: 10px;" outcome="cadastrarcurso" value="Limpar Formul&aacute;rio" icon="ui-icon-star" />
+
+                        <div align="center">
+                            <p:dialog header="View Curso" widgetVar="viewCurso" minimizable="true" maximizable="true" focus="curso_nome">
+                                <h:panelGrid id="panel" columns="2" cellpadding="4" >
+
+                                    <p:outputLabel/>
+                                    <h:inputHidden id="curso_id" value="#{mbCurso.curso.curso_id}"/> 
+
+                                    <p:outputLabel value="Curso.:"/>
+                                    <p:inputText id="curso_nome" size="40" maxlength="50" value="#{mbCurso.curso.curso_nome}" required="true"
+                                                 requiredMessage="O campo [Curso] &eacute; obrigat&oacute;rio."/>
+
+
+                                    <p:outputLabel value="Vagas.:"/>
+                                    <p:inputText id="curso_vagas" size="40" maxlength="11" value="#{mbCurso.curso.curso_vagas}" required="true"
+                                                 requiredMessage="O campo [Vagas] &eacute; obrigat&oacute;rio."/>
+
+                                    <p:outputLabel value="Curso Refer&ecirc;ncia.:" />
+                                    <p:selectOneMenu id="curso_vestibular" value="#{mbCurso.curso.curso_referencia}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Curso Refer&ecirc;ncia] &eacute; obrigat&oacute;rio" >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItem itemLabel="Vestibular" itemValue="vestibular" />
+                                        <f:selectItem itemLabel="Vestibular Medicina" itemValue="vestibularmedicina" />
+                                        <f:selectItem itemLabel="Resid&ecirc;ncia M&eacute;dica" itemValue="residenciamedica" />
+                                        <f:selectItem itemLabel="P&oacute;s Gradua&ccedil;&atilde;o Pecu&aacute;ria Leiteira" itemValue="pospecuarialeiteira" />
+                                        <f:selectItem itemLabel="Pronatec" itemValue="pronatec" />
+                                        <f:selectItem itemLabel="Liga Acad&ecirc;mica - Medicina" itemValue="ligaacademica" />
+                                        <f:selectItem itemLabel="P&oacute;s Gradua&ccedil;&atilde;o de Produ&ccedil;&atilde;o de Bovinos" itemValue="posbovino" />
+                                        <f:selectItem itemLabel="Curso Introdu&ccedil;&atilde;o ao Estudo do Processo Penal" itemValue="cursoprocessopenal" />
+
+                                    </p:selectOneMenu>
+
+
+
+                                    <h:outputText value="Curso de Extens&atilde;o.:" />
+                                    <p:selectOneButton value="#{mbCurso.curso.curso_extensao}" required="true"
+                                                       requiredMessage="O campo [Curso de Extens&atilde;o] &eacute; obrigat&oacute;rio.">
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                    </p:selectOneButton>
+
+
+
+                                    <h:outputText value="Ativo.:" />
+                                    <p:selectOneButton value="#{mbCurso.curso.curso_flag}" required="true"
+                                                       requiredMessage="O campo [Ativo] &eacute; obrigat&oacute;rio.">
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                    </p:selectOneButton>
+
+                                    <br />
+
+
+                                </h:panelGrid>
+                                <p:panel style="text-align: center;">
+                                    <p:commandButton value="Salvar" style="background-color: red;" action="#{mbCurso.addCurso}"
+                                                     image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Limpar" disabled="#{mbCurso.curso.curso_id != null}" >
+                                        <p:ajax update="panel" resetValues="true" />
+                                    </p:commandButton>
+                                </p:panel>
+                            </p:dialog>
+                        </div>
+                    </h:form>
+                </p:tab>
+            </p:tabView>
+
+
+
+
+
+
+
+
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+                <p:dataTable id="idTabela" var="curso" value="#{mbCurso.cursos}"
+                             paginator="true" rows="20" emptyMessage="Nenhum registro encontrado!"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30,50,100,200">
+
+                    <f:facet name="header">Lista de Cursos</f:facet>
+                    <p:column headerText="Id" filterBy="#{curso.curso_id}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{curso.curso_id}"/>
+                    </p:column>
+                    <p:column headerText="Curso" filterBy="#{curso.curso_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{curso.curso_nome}"/>
+                    </p:column>
+                    <p:column headerText="Vagas" filterBy="#{curso.curso_vagas}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{curso.curso_vagas}"/>
+                    </p:column>
+                    <p:column headerText="Curso Refer&ecirc;ncia" filterBy="#{curso.curso_referencia}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{curso.curso_referencia}"/>
+                    </p:column>
+                    <p:column headerText="Curso de Extens&atilde;o" filterBy="#{curso.curso_extensao == '1' ? 'Sim' : 'N&atilde;o'}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{curso.curso_extensao == '1' ? 'Sim' : 'N&atilde;o'}"/>
+                    </p:column>
+                    <p:column headerText="Ativo" filterBy="#{curso.curso_flag == '1' ? 'Sim' : 'N&atilde;o'}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{curso.curso_flag == '1' ? 'Sim' : 'N&atilde;o'}"/>
+                    </p:column>
+
+                    <p:column style="width: 15%; text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="A&ccedil;&otilde;es"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" oncomplete="PF('viewCurso').show();" update=":tbv1:formCurso" 
+                                         process="@this"
+                                         image="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbCurso.curso}" value="#{curso}"/>
+                        </p:commandButton>
+
+                        <!-- Excluir -->
+                        <p:commandButton value="Remover" action="#{mbCurso.deleteCurso}" update="@form">
+
+                            <p:confirm header="Excluir Registro" message="Voc&ecirc; gostaria de deletar o registro?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{mbCurso.curso}" value="#{curso}"/>
+
+                            <!-- DialogConfirm Excluir registro -->
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="N&atilde;o" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </p:commandButton>
+
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

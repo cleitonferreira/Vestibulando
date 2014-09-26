@@ -32,29 +32,29 @@ public class Usuario implements Serializable {
     @GeneratedValue
     @Column(name = "USU_ID", nullable = false)
     private Integer usu_id;
-    @Column(name = "USU_NOME", nullable = false, length = 80)
+    @Column(name = "USU_NOME", nullable = true, length = 80)
     private String usu_nome;
-    @Column(name = "USU_CPF", nullable = false, length = 14) //224.491.491-71
+    @Column(name = "USU_CPF", nullable = true, length = 14) //224.491.491-71
     private String usu_cpf;
-    @Column(name = "USU_RG", nullable = false, length = 25) 
+    @Column(name = "USU_RG", nullable = true, length = 20)
     private String usu_rg;
-    @Column(name = "USU_TEL", nullable = false, length = 14)//(34)-8888-8888
-    private String usu_tel;
-    @Column(name = "USU_CEL", nullable = false, length = 15)
-    private String usu_cel;
-    @Column(name = "USU_DATANASC", nullable = false)
+    @Column(name = "USU_DATANASC", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date usu_datanasc;
-    @Column(name = "USU_EMAIL", unique = true, nullable = false, length = 50)
-    private String usu_email;
-    @Column(name = "USU_SENHA", length = 40)
-    private String usu_senha;
-    @Column(name = "USU_PERMISAO", length = 20)
+    @Column(name = "USU_TEL", nullable = true, length = 14)//(34)-8888-8888
+    private String usu_tel;
+    @Column(name = "USU_CEL", nullable = true, length = 15)
+    private String usu_cel;
+    @Column(name = "USU_PERMISAO", nullable = true, length = 20)
     private String usu_permissao;
+    @Column(name = "USU_EMAIL", unique = true, nullable = true, length = 50)
+    private String usu_email;
+    @Column(name = "USU_SENHA", nullable = true, length = 40)
+    private String usu_senha;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "SetorUsuario")
-    @JoinColumn(name = "SET_ID", referencedColumnName = "set_id")
+    @ForeignKey(name = "FK_SETOR_USUARIO")
+    @JoinColumn(name = "SET_ID", referencedColumnName = "set_id", nullable = true)
     private Setor setor;
 
     public Usuario() {
@@ -93,6 +93,14 @@ public class Usuario implements Serializable {
         this.usu_rg = usu_rg;
     }
 
+    public Date getUsu_datanasc() {
+        return usu_datanasc;
+    }
+
+    public void setUsu_datanasc(Date usu_datanasc) {
+        this.usu_datanasc = usu_datanasc;
+    }
+
     public String getUsu_tel() {
         return usu_tel;
     }
@@ -109,12 +117,12 @@ public class Usuario implements Serializable {
         this.usu_cel = usu_cel;
     }
 
-    public Date getUsu_datanasc() {
-        return usu_datanasc;
+    public String getUsu_permissao() {
+        return usu_permissao;
     }
 
-    public void setUsu_datanasc(Date usu_datanasc) {
-        this.usu_datanasc = usu_datanasc;
+    public void setUsu_permissao(String usu_permissao) {
+        this.usu_permissao = usu_permissao;
     }
 
     public String getUsu_email() {
@@ -133,14 +141,6 @@ public class Usuario implements Serializable {
         this.usu_senha = usu_senha;
     }
 
-    public String getUsu_permissao() {
-        return usu_permissao;
-    }
-
-    public void setUsu_permissao(String usu_permissao) {
-        this.usu_permissao = usu_permissao;
-    }
-
     public Setor getSetor() {
         return setor;
     }
@@ -151,8 +151,8 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (this.usu_id != null ? this.usu_id.hashCode() : 0);
+        int hash = 7;
+        hash = 17 * hash + (this.usu_id != null ? this.usu_id.hashCode() : 0);
         return hash;
     }
 

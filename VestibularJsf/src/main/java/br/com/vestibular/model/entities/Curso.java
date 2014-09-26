@@ -28,25 +28,25 @@ public class Curso implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "CURSO_ID", nullable = false)
+    @Column(name = "CURSO_ID", nullable = true)
     private Integer curso_id;
-    @Column(name = "CURSO_CODIGO", nullable = false, length = 10)
-    private String curso_codigo;
-    @Column(name = "CURSO_NOME", nullable = false, length = 80)
+    @Column(name = "CURSO_NOME", nullable = true, length = 80)
     private String curso_nome;
-    @Column(name = "CURSO_VAGAS", nullable = false, length = 11)
+    @Column(name = "CURSO_VAGAS", nullable = true, length = 11)
     private Integer curso_vagas;
-    @Column(name = "CURSO_EXTENSAO", nullable = false, length = 1)
-    private Boolean curso_extensao;
-    @Column(name = "CURSO_FLAG", nullable = false, length = 1)
-    private Boolean curso_flag;
+    @Column(name = "CURSO_REFERENCIA", nullable = true, length = 20)
+    private String curso_referencia;
+    @Column(name = "CURSO_EXTENSAO", nullable = true, columnDefinition = "TINYINT(1)")
+    private Integer curso_extensao;
+    @Column(name = "CURSO_FLAG", nullable = true, columnDefinition = "TINYINT(1)")
+    private Integer curso_flag;
 
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
-    @ForeignKey(name = "CursoInscricao")
+    @ForeignKey(name = "FK_CURSO_INCRICAO")
     private List<Inscricao> inscricoes;
 
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
-    @ForeignKey(name = "CursoInscricao2")
+    @ForeignKey(name = "FK_CURSO2_INSCRICAO")
     private List<Inscricao> inscricoes2;
 
     public Curso() {
@@ -58,14 +58,6 @@ public class Curso implements Serializable {
 
     public void setCurso_id(Integer curso_id) {
         this.curso_id = curso_id;
-    }
-
-    public String getCurso_codigo() {
-        return curso_codigo;
-    }
-
-    public void setCurso_codigo(String curso_codigo) {
-        this.curso_codigo = curso_codigo;
     }
 
     public String getCurso_nome() {
@@ -84,19 +76,27 @@ public class Curso implements Serializable {
         this.curso_vagas = curso_vagas;
     }
 
-    public Boolean isCurso_extensao() {
+    public String getCurso_referencia() {
+        return curso_referencia;
+    }
+
+    public void setCurso_referencia(String curso_referencia) {
+        this.curso_referencia = curso_referencia;
+    }
+
+    public Integer getCurso_extensao() {
         return curso_extensao;
     }
 
-    public void setCurso_extensao(Boolean curso_extensao) {
+    public void setCurso_extensao(Integer curso_extensao) {
         this.curso_extensao = curso_extensao;
     }
-    
-    public Boolean isCurso_flag() {
+
+    public Integer getCurso_flag() {
         return curso_flag;
     }
 
-    public void setCurso_flag(Boolean curso_flag) {
+    public void setCurso_flag(Integer curso_flag) {
         this.curso_flag = curso_flag;
     }
 
@@ -119,7 +119,7 @@ public class Curso implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + (this.curso_id != null ? this.curso_id.hashCode() : 0);
+        hash = 41 * hash + (this.curso_id != null ? this.curso_id.hashCode() : 0);
         return hash;
     }
 

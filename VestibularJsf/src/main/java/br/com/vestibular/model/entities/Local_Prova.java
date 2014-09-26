@@ -32,13 +32,13 @@ public class Local_Prova implements Serializable {
     private Integer prova_id;
     @Column(name = "PROVA_CIDADE", nullable = false, length = 80)
     private String prova_cidade;
-    @Column(name = "PROVA_OBS", nullable = false, length = 80)
+    @Column(name = "PROVA_OBS", nullable = true, length = 100)
     private String prova_obs;
-    @Column(name = "PROVA_FLAG", nullable = false, length = 1)
-    private Boolean prova_flag;
+    @Column(name = "PROVA_FLAG", nullable = true, columnDefinition = "TINYINT(1)")
+    private Integer prova_flag;
 
     @OneToMany(mappedBy = "local_prova", fetch = FetchType.LAZY)
-    @ForeignKey(name = "Local_Prova_Inscricao")
+    @ForeignKey(name = "FK_PROVA_INSCRICAO")
     private List<Inscricao> inscricoes;
 
     public Local_Prova() {
@@ -68,11 +68,11 @@ public class Local_Prova implements Serializable {
         this.prova_obs = prova_obs;
     }
 
-    public Boolean isProva_flag() {
+    public Integer getProva_flag() {
         return prova_flag;
     }
 
-    public void setProva_flag(Boolean prova_flag) {
+    public void setProva_flag(Integer prova_flag) {
         this.prova_flag = prova_flag;
     }
 
@@ -86,8 +86,8 @@ public class Local_Prova implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + (this.prova_id != null ? this.prova_id.hashCode() : 0);
+        int hash = 7;
+        hash = 97 * hash + (this.prova_id != null ? this.prova_id.hashCode() : 0);
         return hash;
     }
 
@@ -107,7 +107,6 @@ public class Local_Prova implements Serializable {
     }
 
     
-
     
     
 }

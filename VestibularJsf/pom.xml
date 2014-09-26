@@ -103,7 +103,7 @@
         </repository>
 
         <!-- REPO2 REPOSITORY -->
-<!--        <repository>
+        <!--        <repository>
             <id>repo2</id>
             <url>http://repo.maven.apache.org/maven2/org/apache/maven/plugins/</url>
         </repository>-->

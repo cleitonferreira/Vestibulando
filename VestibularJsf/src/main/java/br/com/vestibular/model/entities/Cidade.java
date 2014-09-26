@@ -32,17 +32,17 @@ public class Cidade implements Serializable {
     @GeneratedValue
     @Column(name = "CID_ID", nullable = false)
     private Integer cid_id;
-    @Column(name = "CID_NOME", nullable = false, length = 80)
+    @Column(name = "CID_NOME", nullable = true, length = 80)
     private String cid_nome;
 
     //relacionamento com estado
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "EstadoCidade")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_ESTADO_CIDADE")
     @JoinColumn(name = "EST_ID", referencedColumnName = "est_id")
     private Estado estado;
 
     @OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
-    @ForeignKey(name = "CidadeInscricao")
+    @ForeignKey(name = "FK_CIDADE_INSCICAO")
     private List<Inscricao> inscricoes;
 
     public Cidade() {
@@ -84,7 +84,7 @@ public class Cidade implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 43 * hash + (this.cid_id != null ? this.cid_id.hashCode() : 0);
+        hash = 53 * hash + (this.cid_id != null ? this.cid_id.hashCode() : 0);
         return hash;
     }
 
@@ -103,8 +103,6 @@ public class Cidade implements Serializable {
         return true;
     }
 
-    
-    
     
 
 }

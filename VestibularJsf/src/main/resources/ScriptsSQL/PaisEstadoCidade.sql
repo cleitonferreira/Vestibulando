@@ -1,11 +1,14 @@
 
-use veiculojsf_db;
 	        
-
+use faa20;
 	        
-INSERT INTO `pais` (`pa_id`, `pa_nome`, `pa_sigla`) VALUES (1, 'Brasil', 'BR');
+	        
+INSERT INTO `PAIS` (`pa_id`, `pa_nome`, `pa_sigla`) VALUES (1, 'Brasil', 'BR');
 
-INSERT INTO `estado` (`est_id`, `est_nome`, `est_uf`, `pa_id`) VALUES
+
+
+
+INSERT INTO `ESTADO` (`est_id`, `est_nome`, `est_uf`, `pa_id`) VALUES
 (1, 'Acre', 'AC', 1),
 (2, 'Alagoas', 'AL', 1),
 (3, 'Amazonas', 'AM', 1),
@@ -43,7 +46,7 @@ INSERT INTO `estado` (`est_id`, `est_nome`, `est_uf`, `pa_id`) VALUES
 
 
 
-INSERT INTO `cidade` (`cid_id`, `cid_nome`, `est_id`) VALUES
+INSERT INTO `CIDADE` (`cid_id`, `cid_nome`, `est_id`) VALUES
 (1, 'Afonso Cláudio', 8),
 (2, 'Água Doce do Norte', 8),
 (3, 'Águia Branca', 8),
@@ -2087,7 +2090,7 @@ INSERT INTO `cidade` (`cid_id`, `cid_nome`, `est_id`) VALUES
 
 
 
-INSERT INTO `cidade` (`cid_id`, `cid_nome`, `est_id`) VALUES
+INSERT INTO `CIDADE` (`cid_id`, `cid_nome`, `est_id`) VALUES
 (2027, 'Maripá de Minas', 11),
 (2028, 'Marliéria', 11),
 (2029, 'Marmelópolis', 11),
@@ -3975,7 +3978,7 @@ INSERT INTO `cidade` (`cid_id`, `cid_nome`, `est_id`) VALUES
 
 
 
-INSERT INTO `cidade` (`cid_id`, `cid_nome`, `est_id`) VALUES
+INSERT INTO `CIDADE` (`cid_id`, `cid_nome`, `est_id`) VALUES
 (3894, 'Boa Vista do Buricá', 23),
 (3895, 'Boa Vista do Cadeado', 23),
 (3896, 'Boa Vista do Incra', 23),
@@ -5647,6 +5650,5 @@ INSERT INTO `cidade` (`cid_id`, `cid_nome`, `est_id`) VALUES
 (5562, 'Tupiratins', 27),
 (5563, 'Wanderlândia', 27),
 (5564, 'Xambioá', 27);
-
 
 

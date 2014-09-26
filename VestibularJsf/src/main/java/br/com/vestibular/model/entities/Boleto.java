@@ -36,43 +36,43 @@ public class Boleto implements Serializable {
     
     //Na classe Boleto o atributo inscricao_id nao 
     //pode haver relacionamentos por causa da trigger
-    @Column(name = "INSCRICAO_ID", nullable = false, length = 20)
+    @Column(name = "INSCRICAO_ID", nullable = true, length = 20)
     private Long inscricao_id;
     
-    @Column(name = "BOLETO_DT_VENC", nullable = false, length = 10)
+    @Column(name = "BOLETO_DT_VENC", nullable = true, length = 10)
     private String boleto_dt_venc;
-    @Column(name = "BOLETO_VL_BOLETO", nullable = false, precision = 10, scale = 2)
+    @Column(name = "BOLETO_VL_BOLETO", nullable = true, precision = 10, scale = 2)
     private BigDecimal boleto_vl_boleto;
-    @Column(name = "BOLETO_NR_DOC", nullable = false, length = 11)
+    @Column(name = "BOLETO_NR_DOC", nullable = true, length = 11)
     private Integer boleto_nr_doc;
-    @Column(name = "BOLETO_NR_CONV", nullable = false, columnDefinition = "CHAR(6)")
+    @Column(name = "BOLETO_NR_CONV", nullable = true, columnDefinition = "CHAR(6)")
     private String boleto_nr_conv;
-    @Column(name = "BOLETO_NOSSONUMERO", nullable = false, length = 11)
+    @Column(name = "BOLETO_NOSSONUMERO", nullable = true, length = 11)
     private Integer boleto_nossonumero;
-    @Column(name = "BOLETO_DT_DOC", nullable = false, length = 10)
+    @Column(name = "BOLETO_DT_DOC", nullable = true, length = 10)
     private String boleto_dt_doc;
-    @Column(name = "BOLETO_DT_VAL", nullable = false, length = 10)
+    @Column(name = "BOLETO_DT_VAL", nullable = true, length = 10)
     private String boleto_dt_val;
-    @Column(name = "BOLETO_DATA_PGTO", nullable = false)
+    @Column(name = "BOLETO_DATA_PGTO", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date boleto_data_pgto;
-    @Column(name = "BOLETO_INSTRUCAO", nullable = false, columnDefinition="Text")
+    @Column(name = "BOLETO_INSTRUCAO", nullable = true, columnDefinition="Text")
     private String boleto_instrucao;
-    @Column(name = "BOLETO_PAGO", nullable = false, precision = 10, scale = 2)
+    @Column(name = "BOLETO_PAGO", nullable = true, precision = 10, scale = 2)
     private BigDecimal boleto_pago;
-    @Column(name = "BOLETO_DT_CREDITO", nullable = false)
+    @Column(name = "BOLETO_DT_CREDITO", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date boleto_dt_credito;
-    @Column(name = "BOLETO_DT_ARQUIVO", nullable = false)
+    @Column(name = "BOLETO_DT_ARQUIVO", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date boleto_dt_arquivo;
-    @Column(name = "BOLETO_NR_RETORNO", nullable = false, length = 7)
+    @Column(name = "BOLETO_NR_RETORNO", nullable = true, length = 7)
     private String boleto_nr_retorno;
-    @Column(name = "BOLETO_LINHA_RETORNO", nullable = false, length = 6)
+    @Column(name = "BOLETO_LINHA_RETORNO", nullable = true, length = 6)
     private String boleto_linha_retorno;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularBoleto")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_BOLETO_VESTIBULAR")
     @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info")
     private Vestibular vestibular;
 
@@ -219,7 +219,7 @@ public class Boleto implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + (this.boleto_id != null ? this.boleto_id.hashCode() : 0);
+        hash = 47 * hash + (this.boleto_id != null ? this.boleto_id.hashCode() : 0);
         return hash;
     }
 
@@ -237,9 +237,6 @@ public class Boleto implements Serializable {
         }
         return true;
     }
-
-    
-    
 
     
     

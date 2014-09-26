@@ -9,7 +9,7 @@
       ><!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
 
     <h:head>
-        <title>VeiculoJsf - Sistema JSF e Maven</title>
+        <title>VestibularJsf - Sistema JSF e Maven</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <link href="./../resources/css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/imagens/favicon.png" rel="shortcut icon" type="image/x-icon" />
@@ -28,7 +28,7 @@
     <h:body>
 
         <div id="topo">
-            <a href="http://www.veiculojsf.com.br/">
+            <a href="http://www.vestibularjsf.com.br/">
                 <div id="logotipo"></div>
             </a>
 
@@ -37,6 +37,7 @@
                 <h5 style="text-align: right; color: white;margin-top: 20px; font-size: 10px;">
                     <h:outputText value="SEJA BEM VINDO(A)!!!" />
                 </h5>
+                <p style="text-align: right; margin-top: -10px; color: white;"><h:outputText value="#{bbUsuarioLogado.procuraUsuario().getUsu_nome()}" /></p>
 
                 <br/>
                 <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
@@ -55,35 +56,64 @@
         <div style="float: right; margin-top: -125px;"><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></div>
 
 
-        <div id="menu"><!-- Menu ########################################## Menu-->
-            <h:form>    
-                <p:menubar styleClass="labelmenu">
+        <!-- Menu ########################################## Menu-->
+        <!-- MENU USUARIO COMUM -->
+        <c:if test="${bbUsuarioLogado.procuraUsuario().getUsu_permissao() == 'ROLE_USER'}">  
+                        <div id="menu">
+                <h:form>    
+                    <p:menubar styleClass="labelmenu">
+                        <p:menuitem  value="Home" url="/principal/home.faces"/>
+                        <p:submenu label="Consultas">
+                            <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
+                            <p:menuitem value="Usuarios" url="/restrict/consultas/consultarusuarios.faces"/>
+                            <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
+                            <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
+                            <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
+                        </p:submenu>
+                        <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
 
-                    <p:menuitem  value="Home" url="/restrict/home.faces"/>
-                    <p:submenu label="Cadastros">
-                        <p:menuitem  value="Setores" url="/restrict/cadastros/cadastrarsetor.faces"/>
-                        <p:menuitem  value="Usuarios" url="/restrict/cadastros/cadastrarusuario.faces"/>
-                        <p:menuitem  value="Paises" url="/restrict/cadastros/cadastrarpais.faces"/>
-                        <p:menuitem  value="Estados" url="/restrict/cadastros/cadastrarestado.faces"/>
-                        <p:menuitem  value="Cidades" url="/restrict/cadastros/cadastrarcidade.faces"/>
-                    </p:submenu> 
-                    <p:submenu label="Consultas">
-                        <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
-                        <p:menuitem value="Usuarios" url="/restrict/consultas/consultarusuarios.faces"/>
-                        <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
-                        <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
-                        <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
-                    </p:submenu>
-                    <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
+                    </p:menubar> 
+                </h:form>           
+            </div>
+        </c:if>
+        <!-- MENU USUARIO COMUM -->
+        <c:if test="${bbUsuarioLogado.procuraUsuario().getUsu_permissao() == 'ROLE_ADMIN'}">  
+            <div id="menu">
+                <h:form>    
+                    <p:menubar styleClass="labelmenu">
+                        <p:menuitem  value="Home" url="/principal/home.faces"/>
+                        <p:submenu label="Cadastros">
+                            <p:menuitem  value="Setores" url="/restrict/cadastros/cadastrarsetor.faces"/>
+                            <p:menuitem  value="Usuarios" url="/restrict/cadastros/cadastrarusuario.faces"/>
+                            <p:menuitem  value="Paises" url="/restrict/cadastros/cadastrarpais.faces"/>
+                            <p:menuitem  value="Estados" url="/restrict/cadastros/cadastrarestado.faces"/>
+                            <p:menuitem  value="Cidades" url="/restrict/cadastros/cadastrarcidade.faces"/>
+                            <p:menuitem  value="Vestibular" url="/restrict/cadastros/cadastrarvestibular.faces"/>
+                            <p:menuitem  value="Curso" url="/restrict/cadastros/cadastrarcurso.faces"/>
+                            <p:menuitem  value="Loca de Prova" url="/restrict/cadastros/cadastrarlocalprova.faces"/>
+                        </p:submenu> 
+                        <p:submenu label="Inscri&ccedil;&otilde;es">
+                            <p:menuitem  value="Vestibular" url="/restrict/cadastros/vestibular.faces"/>
+                            <p:menuitem  value="Vestibular Medicina" url="/restrict/cadastros/vestibularmedicina.faces"/>
+                        </p:submenu>
+                        <p:submenu label="Consultas">
+                            <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
+                            <p:menuitem value="Usuarios" url="/restrict/consultas/consultarusuarios.faces"/>
+                            <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
+                            <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
+                            <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
+                        </p:submenu>
+                        <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
 
-                </p:menubar> 
-            </h:form>           
-        </div>
+                    </p:menubar> 
+                </h:form>           
+            </div>
+        </c:if> 
+
 
         <div id="tarefas">
             <ui:insert name="tarefas"></ui:insert>
         </div>
-
 
     </h:body>
 
@@ -92,6 +122,7 @@
         <h4 style="color: #0174df; text-align: center;">Centro de Ensino Superior de Valen&ccedil;a</h4>
 
         <center>
+
             <p:column colspan="2">  
                 <p:graphicImage url="../resources/imagens/Analise_Sistemas.png" />  
             </p:column>  

@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../../resources/main.xhtml">
+
+    <ui:define name="tarefas">
+        <p:fieldset>
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Formul&aacute;rio de Cadastro [Local de Prova]">
+                    <h:form prependId="false" id="formLocal_Prova">
+
+                        <p:commandButton value="Novo Registro" action="#{mbLocal_Prova.limpLocal_Prova}" onclick="PF('viewLocal_Prova').show();" 
+                                         type="button" styleClass="" icon="ui-icon-extlink" />
+
+                        <p:button style="margin-left: 10px;" outcome="cadastrarlocalprova" value="Limpar Formul&aacute;rio" icon="ui-icon-star" />
+
+                        <div align="center">
+                            <p:dialog header="View Local de Prova" widgetVar="viewLocal_Prova" minimizable="true" maximizable="true" focus="prova_cidade">
+                                <h:panelGrid id="panel" cellpadding="4" >
+
+                                    <p:outputLabel/>
+                                    <h:inputHidden id="prova_id" value="#{mbLocal_Prova.local_prova.prova_id}"/> 
+
+                                    <p:outputLabel value="Local de Prova.:"/>
+                                    <p:inputText id="prova_cidade" size="40" maxlength="80" value="#{mbLocal_Prova.local_prova.prova_cidade}"
+                                                 required="true" requiredMessage="O campo [Local de prova] &eacute; obrigat&oacute;rio."/>
+
+                                    <p:outputLabel value="Obs.:"/>
+                                    <p:inputTextarea id="prova_obs" rows="5" cols="30" counter="display" maxlength="100" value="#{mbLocal_Prova.local_prova.prova_obs}"
+                                                     counterTemplate="{0} caracteres restantes." autoResize="false" >
+
+                                    </p:inputTextarea>
+                                    <h:outputText id="display" />
+
+                                    <br />
+
+                                    <h:outputText value="Ativo.:" />
+                                    <p:selectOneButton value="#{mbLocal_Prova.local_prova.prova_flag}" required="true"
+                                                       requiredMessage="O campo [Ativo] &eacute; obrigat&oacute;rio.">
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                    </p:selectOneButton>
+
+                                    <br />
+
+                                </h:panelGrid>
+                                <p:panel style="text-align: center;">
+                                    <p:commandButton value="Salvar" style="background-color: red;" action="#{mbLocal_Prova.addLocal_Prova}"
+                                                     image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Limpar" disabled="#{mbLocal_Prova.local_prova.prova_id != null}" >
+                                        <p:ajax update="panel" resetValues="true" />
+                                    </p:commandButton>
+                                </p:panel>
+                            </p:dialog>
+                        </div>
+                    </h:form>
+                </p:tab>
+            </p:tabView>
+
+
+
+
+
+
+
+
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+                <p:dataTable id="idTabela" var="local_prova" value="#{mbLocal_Prova.local_provas}"
+                             paginator="true" rows="20" emptyMessage="Nenhum registro encontrado!"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30,50,100,200">
+
+                    <f:facet name="header">Lista de Locais de Provas</f:facet>
+                    <p:column headerText="Id" filterBy="#{local_prova.prova_id}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{local_prova.prova_id}"/>
+                    </p:column>
+                    <p:column headerText="Local de Prova" filterBy="#{local_prova.prova_cidade}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{local_prova.prova_cidade}"/>
+                    </p:column>
+                    <p:column headerText="Ativo" filterBy="#{local_prova.prova_flag == '1' ? 'Sim' : 'N&atilde;o'}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{local_prova.prova_flag == '1' ? 'Sim' : 'N&atilde;o'}"/>
+                    </p:column>
+
+                    <p:column style="width: 15%; text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="A&ccedil;&otilde;es"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" oncomplete="PF('viewLocal_Prova').show();" update=":tbv1:formLocal_Prova" 
+                                         process="@this"
+                                         image="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbLocal_Prova.local_prova}" value="#{local_prova}"/>
+                        </p:commandButton>
+
+                        <!-- Excluir -->
+                        <p:commandButton value="Remover" action="#{mbLocal_Prova.deleteLocal_Prova}" update="@form">
+
+                            <p:confirm header="Excluir Registro" message="Voc&ecirc; gostaria de deletar o registro?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{mbLocal_Prova.local_prova}" value="#{local_prova}"/>
+
+                            <!-- DialogConfirm Excluir registro -->
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="N&atilde;o" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </p:commandButton>
+
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

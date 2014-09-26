@@ -1,11 +1,9 @@
-	      
-use veiculojsf_db;
+--todos os setores
+
+use faa20;
 
 
-#todos os setores
-
-
-INSERT INTO `setor` (`set_id`, `set_nome`, `set_ramal`, `set_responsavel`) VALUES
+INSERT INTO `SETOR` (`SET_ID`, `SET_NOME`, `SET_RAMAL`, `SET_OBS`) VALUES
 (1, 'Administração de Empresas', '0000', ''),
 (2, 'Amoxarifado', '0705', ''),
 (3, 'Anatômico', '0000', ''),

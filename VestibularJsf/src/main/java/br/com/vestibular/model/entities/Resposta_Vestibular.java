@@ -33,118 +33,118 @@ public class Resposta_Vestibular implements Serializable {
     @GeneratedValue
     @Column(name = "RESPOSTA_ID", nullable = false)
     private Integer resposta_id;
-    @Column(name = "RESPOSTA_FLAG", nullable = false, length = 1)
+    @Column(name = "RESPOSTA_FLAG", nullable = true, length = 1)
     private Boolean resposta_flag;
-    @Column(name = "RESPOSTA_DATACAD", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "RESPOSTA_DATACAD", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date resposta_datacad;
 
-    @Column(name = "RESPOSTA_1", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_1", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_1;
-    @Column(name = "RESPOSTA_2", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_2", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_2;
-    @Column(name = "RESPOSTA_3", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_3", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_3;
-    @Column(name = "RESPOSTA_4", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_4", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_4;
-    @Column(name = "RESPOSTA_5", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_5", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_5;
-    @Column(name = "RESPOSTA_6", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_6", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_6;
-    @Column(name = "RESPOSTA_7", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_7", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_7;
-    @Column(name = "RESPOSTA_8", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_8", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_8;
-    @Column(name = "RESPOSTA_9", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_9", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_9;
-    @Column(name = "RESPOSTA_10", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_10", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_10;
-    @Column(name = "RESPOSTA_12", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_12", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_12;
-    @Column(name = "RESPOSTA_13", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_13", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_13;
-    @Column(name = "RESPOSTA_14", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_14", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_14;
-    @Column(name = "RESPOSTA_15", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_15", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_15;
-    @Column(name = "RESPOSTA_16", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_16", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_16;
-    @Column(name = "RESPOSTA_17", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_17", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_17;
-    @Column(name = "RESPOSTA_18", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_18", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_18;
-    @Column(name = "RESPOSTA_19", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_19", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_19;
-    @Column(name = "RESPOSTA_20", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_20", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_20;
-    @Column(name = "RESPOSTA_21", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_21", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_21;
-    @Column(name = "RESPOSTA_22", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_22", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_22;
-    @Column(name = "RESPOSTA_23", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_23", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_23;
-    @Column(name = "RESPOSTA_24", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_24", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_24;
-    @Column(name = "RESPOSTA_25", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_25", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_25;
-    @Column(name = "RESPOSTA_26", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_26", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_26;
-    @Column(name = "RESPOSTA_27", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_27", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_27;
-    @Column(name = "RESPOSTA_28", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_28", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_28;
-    @Column(name = "RESPOSTA_29", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_29", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_29;
-    @Column(name = "RESPOSTA_30", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_30", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_30;
-    @Column(name = "RESPOSTA_31", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_31", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_31;
-    @Column(name = "RESPOSTA_32", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_32", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_32;
-    @Column(name = "RESPOSTA_33", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_33", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_33;
-    @Column(name = "RESPOSTA_34", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_34", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_34;
-    @Column(name = "RESPOSTA_35", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_35", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_35;
-    @Column(name = "RESPOSTA_36", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_36", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_36;
-    @Column(name = "RESPOSTA_37", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_37", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_37;
-    @Column(name = "RESPOSTA_38", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_38", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_38;
-    @Column(name = "RESPOSTA_39", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_39", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_39;
-    @Column(name = "RESPOSTA_40", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_40", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_40;
-    @Column(name = "RESPOSTA_41", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_41", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_41;
-    @Column(name = "RESPOSTA_42", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_42", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_42;
-    @Column(name = "RESPOSTA_43", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_43", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_43;
-    @Column(name = "RESPOSTA_44", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_44", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_44;
-    @Column(name = "RESPOSTA_45", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_45", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_45;
-    @Column(name = "RESPOSTA_46", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_46", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_46;
-    @Column(name = "RESPOSTA_47", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_47", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_47;
-    @Column(name = "RESPOSTA_48", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_48", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_48;
-    @Column(name = "RESPOSTA_49", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_49", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_49;
-    @Column(name = "RESPOSTA_50", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "RESPOSTA_50", nullable = true, columnDefinition = "CHAR(1)")
     private String resposta_50;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "InscricaoResposta")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_INCRICAO_RESPOSTA")
     @JoinColumn(name = "INSCRICAO_ID", referencedColumnName = "inscricao_id")
     private Inscricao inscricao;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularResposta")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_VESTIBULAR_RESPOSTA")
     @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info")
     private Vestibular vestibular;
 
@@ -595,18 +595,16 @@ public class Resposta_Vestibular implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
-            return false;
+            return true;
         }
         if (getClass() != obj.getClass()) {
-            return false;
+            return true;
         }
         final Resposta_Vestibular other = (Resposta_Vestibular) obj;
         if (this.resposta_id != other.resposta_id && (this.resposta_id == null || !this.resposta_id.equals(other.resposta_id))) {
-            return false;
+            return true;
         }
         return true;
     }
-
-    
 
 }

@@ -7,7 +7,7 @@ package br.com.vestibular.controller;
 
 import br.com.vestibular.model.dao.HibernateDAO;
 import br.com.vestibular.model.dao.InterfaceDAO;
-import br.com.vestibular.model.entities.Vestibular;
+import br.com.vestibular.model.entities.Curso;
 import br.com.vestibular.util.FacesContextUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -20,41 +20,51 @@ import javax.faces.context.FacesContext;
  *
  * @author cleiton
  */
-@ManagedBean(name = "mbVestibular")
+@ManagedBean(name = "mbCurso")
 @ViewScoped
-public class MbVestibular implements Serializable {
+public class MbCurso implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Vestibular vestibular = new Vestibular();
-    private List<Vestibular> vestibulares;
-    private List<Vestibular> filteredVestibulares;
-    private List<Vestibular> consultaVestibulares;
+    private Curso curso = new Curso();
+    private List<Curso> cursos;
+    private List<Curso> filteredCursos;
+    private List<Curso> consultaCursos;
 
-    public MbVestibular() {
+    public MbCurso() {
+        
     }
 
-    private InterfaceDAO<Vestibular> vestibularDAO() {
-        InterfaceDAO<Vestibular> vestibularDAO = new HibernateDAO<Vestibular>(Vestibular.class, FacesContextUtil.getRequestSession());
-        return vestibularDAO;
+    private InterfaceDAO<Curso> cursoDAO() {
+        InterfaceDAO<Curso> cursoDAO = new HibernateDAO<Curso>(Curso.class, FacesContextUtil.getRequestSession());
+        return cursoDAO;
     }
 
-    public String limpVestibular() {
-        vestibular = new Vestibular();
-        return editVestibular();
+    public String limpCurso() {
+        curso = new Curso();
+        return editCurso();
     }
 
-    public String editVestibular() {
-        return "/restrict/cadastros/cadastrarvestibular.faces";
+    public String editCurso() {
+        return "/restrict/cadastros/cadastrarcurso.faces";
     }
 
+    public String addCurso() {
+        // verifica a id veio igual a null ou id igual a 0
+        if (curso.getCurso_id() == null || curso.getCurso_id() == 0) {
+            insertCurso();
+        } else {
+            updateCurso();
+        }
+        limpCurso();
+        return null;
+    }
 
-    public void insertVestibular() {
+    private void insertCurso() {
         try {
-            vestibularDAO().save(vestibular);
+            cursoDAO().save(curso);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Cadastrar],  no Banco de Dados", "" + ex));
@@ -63,66 +73,64 @@ public class MbVestibular implements Serializable {
         }
     }
 
-    public void updateVestibular() {
+    private void updateCurso() {
         try {
-            vestibularDAO().update(vestibular);
+            cursoDAO().update(curso);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Atualizar], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
-    public void deleteVestibular() {
+    public void deleteCurso() {
         try {
-            vestibularDAO().remove(vestibular);
+            cursoDAO().remove(curso);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Excluir], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
-
     }
 
-    public List<Vestibular> getVestibulares() {
-        vestibulares = vestibularDAO().getEntities();
-        return vestibulares;
+    public List<Curso> getCursos() {
+        cursos = cursoDAO().getEntities();
+        return cursos;
     }
 
-    public void setVestibulares(List<Vestibular> vestibulares) {
-        this.vestibulares = vestibulares;
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 
-    public Vestibular getVestibular() {
-        return vestibular;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public void setVestibular(Vestibular vestibular) {
-        this.vestibular = vestibular;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    public List<Vestibular> getFilteredVestibulares() {
-        return filteredVestibulares;
+    public List<Curso> getFilteredCursos() {
+        return filteredCursos;
     }
 
-    public void setFilteredVestibulares(List<Vestibular> filteredVestibulares) {
-        this.filteredVestibulares = filteredVestibulares;
+    public void setFilteredCursos(List<Curso> filteredCursos) {
+        this.filteredCursos = filteredCursos;
     }
 
-    public List<Vestibular> getConsultaVestibulares() {
-        return consultaVestibulares;
+    public List<Curso> getConsultaCursos() {
+        return consultaCursos;
     }
 
-    public void setConsultaVestibulares(List<Vestibular> consultaVestibulares) {
-        this.consultaVestibulares = consultaVestibulares;
+    public void setConsultaCursos(List<Curso> consultaCursos) {
+        this.consultaCursos = consultaCursos;
     }
 
 }

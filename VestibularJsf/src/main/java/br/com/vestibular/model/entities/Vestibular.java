@@ -35,31 +35,31 @@ public class Vestibular implements Serializable {
     private String vestibular_descricao;
     @Column(name = "VESTIBULAR_SEQ_ID", nullable = false, length = 20)
     private Long vestibular_seq_id;
-    @Column(name = "VESTIBULAR_INICIO", nullable = false)
+    @Column(name = "VESTIBULAR_INICIO", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date vestibular_inicio;
-    @Column(name = "VESTIBULAR_FIM", nullable = false)
+    @Column(name = "VESTIBULAR_FIM", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date vestibular_fim;
-    @Column(name = "VESTIBULAR_VALOR", nullable = false, precision = 10, scale = 2)
+    @Column(name = "VESTIBULAR_VALOR", nullable = true, precision = 10, scale = 2)
     private BigDecimal vestibular_valor;
     @Column(name = "VESTIBULAR_DIA", nullable = false, length = 11)
     private Integer vestibular_dia;
 
     @OneToMany(mappedBy = "vestibular", fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularInscricao")
+    @ForeignKey(name = "FK_VESTIBULAR_INSCRICAO")
     private List<Inscricao> inscricoes;
 
     @OneToMany(mappedBy = "vestibular", fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularBoleto")
+    @ForeignKey(name = "FK_BOLETO_VESTIBULAR")
     private List<Boleto> boletos;
 
     @OneToMany(mappedBy = "vestibular", fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularGabarito")
+    @ForeignKey(name = "FK_VESTIBULAR_GABARITO")
     private List<Gabarito_Vestibular> gabarito_vestibulares;
 
     @OneToMany(mappedBy = "vestibular", fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularResposta")
+    @ForeignKey(name = "FK_VESTIBULAR_RESPOSTA")
     private List<Resposta_Vestibular> resposta_vestibulares;
 
     public String getVestibular_info() {

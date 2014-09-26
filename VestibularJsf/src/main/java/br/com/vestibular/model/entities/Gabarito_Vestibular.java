@@ -33,119 +33,116 @@ public class Gabarito_Vestibular implements Serializable {
     @GeneratedValue
     @Column(name = "GABARITO_ID", nullable = false)
     private Integer gabarito_id;
-    @Column(name = "GABARITO_DATACAD", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "GABARITO_DATACAD", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date gabarito_datacad;
-    
-    
-    @Column(name = "GABARITO_1", nullable = false, columnDefinition = "CHAR(1)")
+
+    @Column(name = "GABARITO_1", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_1;
-    @Column(name = "GABARITO_2", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_2", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_2;
-    @Column(name = "GABARITO_3", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_3", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_3;
-    @Column(name = "GABARITO_4", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_4", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_4;
-    @Column(name = "GABARITO_5", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_5", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_5;
-    @Column(name = "GABARITO_6", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_6", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_6;
-    @Column(name = "GABARITO_7", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_7", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_7;
-    @Column(name = "GABARITO_8", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_8", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_8;
-    @Column(name = "GABARITO_9", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_9", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_9;
-    @Column(name = "GABARITO_10", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_10", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_10;
-    @Column(name = "GABARITO_11", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_11", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_11;
-    @Column(name = "GABARITO_12", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_12", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_12;
-    @Column(name = "GABARITO_13", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_13", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_13;
-    @Column(name = "GABARITO_14", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_14", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_14;
-    @Column(name = "GABARITO_15", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_15", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_15;
-    @Column(name = "GABARITO_16", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_16", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_16;
-    @Column(name = "GABARITO_17", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_17", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_17;
-    @Column(name = "GABARITO_18", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_18", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_18;
-    @Column(name = "GABARITO_19", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_19", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_19;
-    @Column(name = "GABARITO_20", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_20", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_20;
-    @Column(name = "GABARITO_21", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_21", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_21;
-    @Column(name = "GABARITO_22", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_22", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_22;
-    @Column(name = "GABARITO_23", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_23", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_23;
-    @Column(name = "GABARITO_24", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_24", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_24;
-    @Column(name = "GABARITO_25", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_25", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_25;
-    @Column(name = "GABARITO_26", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_26", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_26;
-    @Column(name = "GABARITO_27", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_27", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_27;
-    @Column(name = "GABARITO_28", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_28", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_28;
-    @Column(name = "GABARITO_29", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_29", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_29;
-    @Column(name = "GABARITO_30", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_30", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_30;
-    @Column(name = "GABARITO_31", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_31", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_31;
-    @Column(name = "GABARITO_32", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_32", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_32;
-    @Column(name = "GABARITO_33", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_33", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_33;
-    @Column(name = "GABARITO_34", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_34", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_34;
-    @Column(name = "GABARITO_35", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_35", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_35;
-    @Column(name = "GABARITO_36", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_36", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_36;
-    @Column(name = "GABARITO_37", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_37", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_37;
-    @Column(name = "GABARITO_38", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_38", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_38;
-    @Column(name = "GABARITO_39", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_39", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_39;
-    @Column(name = "GABARITO_40", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_40", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_40;
-    @Column(name = "GABARITO_41", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_41", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_41;
-    @Column(name = "GABARITO_42", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_42", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_42;
-    @Column(name = "GABARITO_43", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_43", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_43;
-    @Column(name = "GABARITO_44", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_44", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_44;
-    @Column(name = "GABARITO_45", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_45", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_45;
-    @Column(name = "GABARITO_46", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_46", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_46;
-    @Column(name = "GABARITO_47", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_47", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_47;
-    @Column(name = "GABARITO_48", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_48", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_48;
-    @Column(name = "GABARITO_49", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_49", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_49;
-    @Column(name = "GABARITO_50", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "GABARITO_50", nullable = true, columnDefinition = "CHAR(1)")
     private String gabarito_50;
-    
-    
-    
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularGabarito")
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_VESTIBULAR_GABARITO")
     @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info")
-    private Vestibular vestibular;  
-    
+    private Vestibular vestibular;
+
     public Gabarito_Vestibular() {
         this.vestibular = new Vestibular();
     }
@@ -584,19 +581,16 @@ public class Gabarito_Vestibular implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
-            return false;
+            return true;
         }
         if (getClass() != obj.getClass()) {
-            return false;
+            return true;
         }
         final Gabarito_Vestibular other = (Gabarito_Vestibular) obj;
         if (this.gabarito_id != other.gabarito_id && (this.gabarito_id == null || !this.gabarito_id.equals(other.gabarito_id))) {
-            return false;
+            return true;
         }
         return true;
     }
-
-   
-    
 
 }

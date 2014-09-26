@@ -75,6 +75,7 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
         return criteria.getExecutableCriteria(session).list();
     }
     
+//    -> retorna um objeto List<> contendo todos os campos de uma tabela
     @Override
     public List<T> getEntities() {
         List<T> enties = (List<T>) session.createCriteria(classe).list();

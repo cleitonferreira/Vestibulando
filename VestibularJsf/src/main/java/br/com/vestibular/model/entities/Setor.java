@@ -30,15 +30,15 @@ public class Setor implements Serializable {
     @GeneratedValue
     @Column(name = "SET_ID", nullable = false)
     private Integer set_id;
-    @Column(name = "SET_NOME", nullable = false, length = 50)
+    @Column(name = "SET_NOME", nullable = true, length = 80)
     private String set_nome;
-    @Column(name = "SET_RAMAL", nullable = false, length = 4)
+    @Column(name = "SET_RAMAL", nullable = true, length = 4)
     private String set_ramal;
-    @Column(name = "SET_RESPONSAVEL", nullable = false, length = 50)
-    private String set_responsavel;
+    @Column(name = "SET_OBS", nullable = true, length = 100)
+    private String set_obs;
 
     @OneToMany(mappedBy = "setor", fetch = FetchType.LAZY)
-    @ForeignKey(name = "SetorUsuario")
+    @ForeignKey(name = "FK_SETOR_USUARIO")
     private List<Usuario> usuarios;
 
     public Setor() {
@@ -68,12 +68,12 @@ public class Setor implements Serializable {
         this.set_ramal = set_ramal;
     }
 
-    public String getSet_responsavel() {
-        return set_responsavel;
+    public String getSet_obs() {
+        return set_obs;
     }
 
-    public void setSet_responsavel(String set_responsavel) {
-        this.set_responsavel = set_responsavel;
+    public void setSet_obs(String set_obs) {
+        this.set_obs = set_obs;
     }
 
     public List<Usuario> getUsuarios() {
@@ -86,8 +86,8 @@ public class Setor implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + (this.set_id != null ? this.set_id.hashCode() : 0);
+        int hash = 3;
+        hash = 37 * hash + (this.set_id != null ? this.set_id.hashCode() : 0);
         return hash;
     }
 
@@ -107,10 +107,9 @@ public class Setor implements Serializable {
     }
 
     
+
     
-
-
-
-
+    
+  
 
 }

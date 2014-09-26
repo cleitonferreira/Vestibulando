@@ -24,21 +24,21 @@ public class Convenio implements Serializable {
     @Id
     @Column(name = "CONVENIO_NR_CONV", nullable = false, columnDefinition = "CHAR(6)")
     private String convenio_nr_conv;
-    @Column(name = "CONVENIO_NR_CART", nullable = false, columnDefinition = "CHAR(2)")
+    @Column(name = "CONVENIO_NR_CART", nullable = true, columnDefinition = "CHAR(2)")
     private String convenio_nr_cart;
-    @Column(name = "CONVENIO_NR_VAR", nullable = false, columnDefinition = "CHAR(3)")
+    @Column(name = "CONVENIO_NR_VAR", nullable = true, columnDefinition = "CHAR(3)")
     private String convenio_nr_var;
-    @Column(name = "CONVENIO_NR_AGE", nullable = false, columnDefinition = "CHAR(4)")
+    @Column(name = "CONVENIO_NR_AGE", nullable = true, columnDefinition = "CHAR(4)")
     private String convenio_nr_age;
-    @Column(name = "CONVENIO_DV_AGE", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "CONVENIO_DV_AGE", nullable = true, columnDefinition = "CHAR(1)")
     private String convenio_dv_age;
-    @Column(name = "CONVENIO_NR_CC", nullable = false, columnDefinition = "CHAR(4)")
+    @Column(name = "CONVENIO_NR_CC", nullable = true, columnDefinition = "CHAR(4)")
     private String convenio_nr_cc;
-    @Column(name = "CONVENIO_DV_CC", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "CONVENIO_DV_CC", nullable = true, columnDefinition = "CHAR(1)")
     private String convenio_dv_cc;
-    @Column(name = "CONVENIO_EDOC", nullable = false, columnDefinition = "CHAR(2)")
+    @Column(name = "CONVENIO_EDOC", nullable = true, columnDefinition = "CHAR(2)")
     private String convenio_edoc;
-    @Column(name = "CONVENIO_ULT_BOL", nullable = false, length = 11)
+    @Column(name = "CONVENIO_ULT_BOL", nullable = true, length = 11)
     private Integer convenio_ult_bol;
 
     public Convenio() {
@@ -118,8 +118,8 @@ public class Convenio implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + (this.convenio_nr_conv != null ? this.convenio_nr_conv.hashCode() : 0);
+        int hash = 3;
+        hash = 53 * hash + (this.convenio_nr_conv != null ? this.convenio_nr_conv.hashCode() : 0);
         return hash;
     }
 
@@ -137,6 +137,7 @@ public class Convenio implements Serializable {
         }
         return true;
     }
+
     
     
 }

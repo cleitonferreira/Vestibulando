@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"                
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../../resources/main.xhtml">
+    <style>
+        .ui-button-text-only .ui-button-text{padding: 0.3em;}
+    </style>
+
+
+    <ui:define name="tarefas">
+        <p:fieldset>
+
+            <style type="text/css">
+                #tbv1 formInscricao{font-size: 12px; color: yellow;}
+            </style>
+
+
+            <script type="text/javascript" >
+                PrimeFaces.locales['pt'] = {
+                    closeText: 'Fechar',
+                    prevText: 'Anterior',
+                    nextText: 'Pr&oacute;ximo',
+                    currentText: 'Começo',
+                    monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'S&aacute;bado'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                    weekHeader: 'Semana',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'S&oacute; Horas',
+                    timeText: 'Tempo',
+                    hourText: 'Hora',
+                    minuteText: 'Minuto',
+                    secondText: 'Segundo',
+                    currentText: 'Data Atual',
+                            ampm: false,
+                    month: 'M&ecirc;s',
+                    week: 'Semana',
+                    day: 'Dia',
+                    allDayText: 'Todo Dia'
+                };
+            </script>
+
+
+
+
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Formul&aacute;rio de [Inscri&ccedil;&atilde;o do Vestibular]">
+                    <h:form id="formInscricao">
+
+                        <p:commandButton value="Novo Registro" action="#{mbInscVestibular.limpInscricao}" process="@none" update="@form"
+                                         onclick="PF('viewInscricao').show();" type="button" styleClass="" icon="ui-icon-extlink" />
+
+                        <p:button style="margin-left: 10px;" outcome="vestibular" value="Limpar Formul&aacute;rio" icon="ui-icon-star" />
+
+                        <br /><br />
+                        <small style="font-weight: bold;">Perfil: Funcion&aacute;rio[FC] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Professor[PF] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Aluno[AL] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Visitante[VS] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </small>
+
+
+                        <div align="center">
+                            <p:dialog header="View Inscri&ccedil;&atilde;o" widgetVar="viewInscricao" minimizable="true" maximizable="true" focus="inscricao_nome" width="70%">
+
+
+                                <p:outputLabel/>
+                                <h:inputHidden id="inscricao_id" value="#{mbInscVestibular.inscricao.inscricao_id}"/>
+
+
+                                <h:panelGrid id="panel" columns="6" cellpadding="8">
+                                    <p:outputLabel value="Vestibular*" />
+                                    <p:selectOneMenu id="vestibular" value="#{mbInscVestibular.vestibular}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Vestibular] &eacute; obrigat&oacute;rio"
+                                                     converter="converterVestibular">
+
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibular.vestibulares}" var="vestibular" itemValue="#{vestibular}" itemLabel="#{vestibular.vestibular_descricao}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="1&#176; op&ccedil;&atilde;o de Curso.:" />
+                                    <p:selectOneMenu id="curso" value="#{mbInscVestibular.curso}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Curso] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterCurso"  >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibular.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.curso_nome}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="2&#176; op&ccedil;&atilde;o de Curso.:" />
+                                    <p:selectOneMenu id="curso2" value="#{mbInscVestibular.curso2}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Curso2] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterCurso"  >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibular.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.curso_nome}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="Local da Prova.:" />
+                                    <p:selectOneMenu id="local_prova" value="#{mbInscVestibular.local_prova}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Local da Prova] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterLocal_Prova"  >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibular.local_provas}" var="local_prova" itemValue="#{local_prova}" itemLabel="#{local_prova.prova_cidade}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="Nome.:"/>
+                                    <p:inputText id="inscricao_nome" size="40" maxlength="80" value="#{mbInscVestibular.inscricao.inscricao_nome}"
+                                                 required="true" requiredMessage="O campo [Nome] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+
+                                    <p:outputLabel value="CPF.:"/>
+                                    <p:inputMask id="inscricao_cpf" size="40" maxlength="14" mask="999.999.999-99" value="#{mbInscVestibular.inscricao.inscricao_cpf}"
+                                                 disabled="#{mbInscVestibular.inscricao.inscricao_cpf != null}" required="true" requiredMessage="O campo [CPF] &eacute; obrigat&oacute;rio">
+                                        <f:validator validatorId="validators.CPFValidator"/> 
+                                        <f:converter converterId="converter.CpfConverter" />
+                                    </p:inputMask>
+
+
+                                    <p:outputLabel value="RG.:"/>
+                                    <p:inputText id="inscricao_rg" size="40" maxlength="20" value="#{mbInscVestibular.inscricao.inscricao_rg}"
+                                                 required="true" requiredMessage="O campo [RG] &eacute; obrigat&oacute;rio">
+                                    </p:inputText>
+
+
+                                    <p:outputLabel value="&Oacute;rg&atilde;o Expedidor.:"/>
+                                    <p:inputText id="inscricao_oe" size="40" maxlength="20" value="#{mbInscVestibular.inscricao.inscricao_oe}"
+                                                 onkeyup="this.value = this.value.toUpperCase()" required="true" 
+                                                 requiredMessage="O campo [&Oacute;rg&atilde;o Expedidor] &eacute; obrigat&oacute;rio">
+                                    </p:inputText>
+
+
+                                    <p:outputLabel value="Data de Nascimento.:" />
+                                    <p:calendar id="inscricao_datanasc" value="#{mbInscVestibular.inscricao.inscricao_datanasc}" 
+                                                locale="pt" pattern="dd-MM-yyyy" mask="true" />
+
+
+                                    <h:outputText value="Sexo.:" />
+                                    <p:selectOneButton value="#{mbInscVestibular.inscricao.inscricao_sexo}">
+                                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                    </p:selectOneButton>
+
+
+                                    <p:outputLabel value="Endere&ccedil;o.:"/>
+                                    <p:inputText id="inscricao_endereco" size="40" maxlength="80" value="#{mbInscVestibular.inscricao.inscricao_endereco}"
+                                                 required="true" requiredMessage="O campo [Endere&ccedil;o] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+                                    <p:outputLabel value="Bairro.:"/>
+                                    <p:inputText id="inscricao_bairro" size="40" maxlength="80" value="#{mbInscVestibular.inscricao.inscricao_bairro}"
+                                                 required="true" requiredMessage="O campo [Bairro] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+
+                                    <p:outputLabel value="Cep.:"/>
+                                    <p:inputMask id="inscricao_cep" size="40" maxlength="10" mask="99999-999"
+                                                 value="#{mbInscVestibular.inscricao.inscricao_cep}" />
+
+
+
+                                    <p:outputLabel value="Estado.:" />
+                                    <p:selectOneMenu id="estado" value="#{mbInscVestibular.estado}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Estado] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterEstado"  >
+                                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{mbInscVestibular.estados}" var="estado" itemValue="#{estado}" itemLabel="#{estado.est_nome}" />
+                                        <p:ajax listener="#{mbInscVestibular.listaCidades}" event="change" update="cidade" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="Cidade.:" />
+                                    <p:selectOneMenu id="cidade" value="#{mbInscVestibular.cidade}" converter="converterCidade" required="true" style="width:220px" effect="fade" panelStyle="width:180px"
+                                                     requiredMessage="O campo [Cidade] &eacute; obrigat&oacute;rio" filter="true" filterMatchMode="startsWith">
+                                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{mbInscVestibular.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.cid_nome}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Telefone.:"/>
+                                    <p:inputMask id="inscricao_tel" size="40" maxlength="14" mask="(99) 9999-9999"
+                                                 value="#{mbInscVestibular.inscricao.inscricao_tel}" />
+
+                                    <p:outputLabel value="Celular.:"/>
+                                    <p:inputMask id="inscricao_cel" size="40" maxlength="15" mask="(99) 9999-9999?9"
+                                                 value="#{mbInscVestibular.inscricao.inscricao_cel}" />
+
+                                    <p:outputLabel value="E-mail.:"/>
+                                    <p:inputText id="inscricao_email" size="40" maxlength="80" value="#{mbInscVestibular.inscricao.inscricao_email}"
+                                                 onkeyup="this.value = this.value.toLowerCase()" required="true"
+                                                 requiredMessage="O campo [Email] &eacute; obrigat&oacute;rio.">
+                                        <f:validator validatorId="emailValidator"/>
+                                    </p:inputText>
+
+
+                                    <h:outputText value="Enem.:" />
+                                    <p:selectOneButton id="inscricao_enem" value="#{mbInscVestibular.inscricao.inscricao_enem}">
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="false" />
+                                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                                    </p:selectOneButton>
+
+
+                                    <h:outputText value="Escreve com a m&atilde;o.:" />
+                                    <p:selectOneButton id="inscricao_escreve_mao" value="#{mbInscVestibular.inscricao.inscricao_escreve_mao}">
+                                        <f:selectItem itemLabel="Esquerda" itemValue="E" />
+                                        <f:selectItem itemLabel="Direita" itemValue="D" />
+                                    </p:selectOneButton>
+
+
+                                    <p:outputLabel value="Portador de Necessidade Especial.:" />
+                                    <p:selectOneRadio id="inscricao_portador_especial" value="#{mbInscVestibular.inscricao.inscricao_portador_especial}">
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="false" />
+                                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                                    </p:selectOneRadio>
+
+                                    <p:outputLabel value="Necessidade Especial.:"/>
+                                    <p:inputText id="inscricao_portador_descricao" size="40" maxlength="80" 
+                                                 value="#{mbInscVestibular.inscricao.inscricao_portador_descricao}" />
+
+
+                                    <p:outputLabel value="Escola(Ensino M&eacute;dio).:"/>
+                                    <p:inputText id="inscricao_escola" size="40" maxlength="80" value="#{mbInscVestibular.inscricao.inscricao_escola}"
+                                                 required="true" requiredMessage="O campo [Escola(Ensino M&eacute;dio)] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+
+
+                                </h:panelGrid>
+                                <p:panel style="text-align: center">
+                                    <p:commandButton value="Salvar" action="#{mbInscVestibular.addInscricao}" onclick="PF('notificacao').hide()"
+                                                     image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Limpar" disabled="#{mbInscVestibular.inscricao.inscricao_id != null}" >
+                                        <p:ajax update="panel" resetValues="true" />
+                                    </p:commandButton>
+                                </p:panel>
+                            </p:dialog>
+                        </div>
+                    </h:form>
+                </p:tab>
+            </p:tabView>
+
+            <style>
+                .ui-notificationbar{
+                    height: 2%;
+                }
+            </style>
+
+            <p:notificationBar position="top" effect="slide" widgetVar="notificacao">
+                <h:outputText value="Por Favor, pressione o bot&atilde;o [Editar] 2 vezes para o carregamento das informa&ccedil;&otilde;es!" style="font-size:15px;" />
+            </p:notificationBar>
+
+            <!--            <p:commandButton value="Fechar a Notifica&ccedil;&atilde;o" onclick="PF('notificacao').hide()" type="button" icon="ui-icon-arrow-1-n"/>-->
+
+
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+                <p:dataTable id="idTabela" var="inscricao" value="#{mbInscVestibular.inscricoes}"
+                             paginator="true" rows="20" emptyMessage="Nenhum registro encontrado!"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30,50,100,200">
+
+                    <f:facet name="header">Lista de Inscri&ccedil;&atilde;o</f:facet>
+                    <p:column headerText="Id" filterBy="#{inscricao.inscricao_id}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.inscricao_id}"/>
+                    </p:column>
+                    <p:column headerText="Vestibular" filterBy="#{inscricao.vestibular.vestibular_info}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.vestibular.vestibular_info}"/>
+                    </p:column>
+                    <p:column headerText="Curso 1" filterBy="#{inscricao.curso.curso_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.curso.curso_nome}"/>
+                    </p:column>
+                    <p:column headerText="Curso 2" filterBy="#{inscricao.curso2.curso_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.curso2.curso_nome}"/>
+                    </p:column>
+                    <p:column headerText="Estado" filterBy="#{inscricao.estado.est_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.estado.est_nome}"/>
+                    </p:column>
+                    <p:column headerText="Cidade" filterBy="#{inscricao.cidade.cid_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.cidade.cid_nome}"/>
+                    </p:column>
+                    <p:column headerText="Local da Prova" filterBy="#{inscricao.local_prova.prova_cidade}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.local_prova.prova_cidade}"/>
+                    </p:column>
+                    <p:column headerText="Nome" filterBy="#{inscricao.inscricao_nome}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.inscricao_nome}"/>
+                    </p:column>
+                    <p:column headerText="Cpf" filterBy="#{inscricao.inscricao_cpf}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.inscricao_cpf}"/>
+                    </p:column>
+
+                    <p:column style="width: 15%; text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="A&ccedil;&otilde;es"/>
+                        </f:facet>
+                        <p:commandButton update=":tbv1:formInscricao" oncomplete="PF('viewInscricao').show();" 
+                                         onclick="PF('notificacao').show()"
+                                         image="ui-icon ui-icon-pencil" value="Editar">
+                            <f:setPropertyActionListener target="#{mbInscVestibular.inscricao}" value="#{inscricao}"/>
+                            <f:setPropertyActionListener target="#{mbInscVestibular.vestibular}" value="#{inscricao.vestibular}" />
+                            <f:setPropertyActionListener target="#{mbInscVestibular.curso}" value="#{inscricao.curso}" />
+                            <f:setPropertyActionListener target="#{mbInscVestibular.curso2}" value="#{inscricao.curso2}" />
+                            <f:setPropertyActionListener target="#{mbInscVestibular.local_prova}" value="#{inscricao.local_prova}" />
+                            <p:ajax update=":tbv1:formInscricao:cidade" listener="#{mbInscVestibular.listaCidades}"/>
+                            <f:setPropertyActionListener target="#{mbInscVestibular.estado}" value="#{inscricao.estado}" />
+                            <f:setPropertyActionListener target="#{mbInscVestibular.cidade}" value="#{inscricao.cidade}" />
+                        </p:commandButton>
+
+                        <!--                         Excluir -->
+                        <p:commandButton value="Remover" action="#{mbInscVestibular.deleteInscricao}" update=":tbv1:formInscricao">
+
+                            <p:confirm header="Excluir Registro" message="Voc&ecirc; gostaria de deletar o registro?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{mbInscVestibular.inscricao}" value="#{inscricao}"/>
+
+                            <!--                             DialogConfirm Excluir registro -->
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="N&atilde;o" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </p:commandButton>
+
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

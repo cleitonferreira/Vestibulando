@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"                
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../../resources/main.xhtml">
+
+
+
+    <ui:define name="tarefas">
+        <p:fieldset>
+
+            <script src="./../../resources/js/jquery.maskMoney.js" type="text/javascript"></script>
+
+
+
+            <script type="text/javascript" >
+                PrimeFaces.locales['pt'] = {
+                    closeText: 'Fechar',
+                    prevText: 'Anterior',
+                    nextText: 'Pr&oacute;ximo',
+                    currentText: 'Começo',
+                    monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'S&aacute;bado'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S&aacute;b'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                    weekHeader: 'Semana',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'S&oacute; Horas',
+                    timeText: 'Tempo',
+                    hourText: 'Hora',
+                    minuteText: 'Minuto',
+                    secondText: 'Segundo',
+                    currentText: 'Data Atual',
+                            ampm: false,
+                    month: 'M&ecirc;s',
+                    week: 'Semana',
+                    day: 'Dia',
+                    allDayText: 'Todo Dia'
+                };
+            </script>
+
+
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Formul&aacute;rio de Cadastro [Vestibular]">
+                    <h:form prependId="false" id="formVestibular">
+
+                        <p:commandButton value="Novo Registro" action="#{mbVestibular.limpVestibular}" 
+                                         onclick="PF('viewVestibular').show();" type="button" styleClass="" icon="ui-icon-extlink" />
+
+                        <p:button style="margin-left: 10px;" outcome="cadastrarvestibular" value="Limpar Formul&aacute;rio" icon="ui-icon-star" />
+
+                        <div align="center">
+                            <p:dialog header="View Vestibular" widgetVar="viewVestibular" minimizable="true" maximizable="true" focus="vestibular_info">
+                                <h:panelGrid id="panel" cellpadding="4" >
+
+
+                                    <p:outputLabel value="Vestibular Info.:"/>
+                                    <p:inputMask id="vestibular_info" size="40" maxlength="8"
+                                                 required="true" requiredMessage="O campo [Vestibular Info] &eacute; obrigat&oacute;rio"
+                                                 mask="99999999" value="#{mbVestibular.vestibular.vestibular_info}" />
+
+
+                                    <p:outputLabel value="Descri&ccedil;&atilde;o do Vestibular.:"/>
+                                    <p:inputText id="vestibular_descricao" size="40" maxlength="80" 
+                                                 value="#{mbVestibular.vestibular.vestibular_descricao}" required="true"
+                                                 requiredMessage="O campo [Descri&ccedil;&atilde;o do Vestibular] &eacute; obrigat&oacute;rio."/>
+
+                                    <p:outputLabel value="Sequ&ecirc;ncia do Vestibular.:"/>
+                                    <p:inputMask id="vestibular_seq_id" size="40" maxlength="20" mask="999999999999" 
+                                                 value="#{mbVestibular.vestibular.vestibular_seq_id}" required="true" 
+                                                 requiredMessage="O campo [Sequ&ecirc;ncia do Vestibular] &eacute; obrigat&oacute;rio">
+                                    </p:inputMask>
+
+
+                                    <p:outputLabel value="In&iacute;cio do Vestibular.:" />
+                                    <p:calendar id="vestibular_inicio" value="#{mbVestibular.vestibular.vestibular_inicio}" locale="pt" pattern="dd-MM-yyyy" mask="true" />
+
+
+                                    <p:outputLabel value="Valor.:" />
+                                    <p:inputText size="40" maxlength="13" id="parcela" required="true" value="#{mbVestibular.vestibular.vestibular_valor}"  requiredMessage="Preencha este campo com o valor da parcela" >  
+                                        <f:convertNumber pattern="#,##0.00"></f:convertNumber>  
+                                        <p:ajax update="parcela" process="parcela" event="change" />  
+                                    </p:inputText>  
+
+
+                                    <p:outputLabel value="Fim do Vestibular.:" />
+                                    <p:calendar id="vestibular_fim" value="#{mbVestibular.vestibular.vestibular_fim}" locale="pt" pattern="dd-MM-yyyy" mask="true" />
+
+
+                                    <p:outputLabel value="Dias para o Vencimento do Boleto.:"/>
+                                    <p:inputMask id="vestibular_dia" size="40" maxlength="2" mask="9?9" value="#{mbVestibular.vestibular.vestibular_dia}">
+                                    </p:inputMask>
+
+
+
+                                </h:panelGrid>
+                                <p:panel style="text-align: center">
+                                    <p:commandButton value="Salvar" action="#{mbVestibular.insertVestibular}"
+                                                     image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Limpar" >
+                                        <p:ajax update="panel" resetValues="true" />
+                                    </p:commandButton>
+                                </p:panel>
+                            </p:dialog>
+                        </div>
+                    </h:form>
+
+
+
+
+                    <!-- Segundo Formulário - por causa do preenchimento da chave primária Vestibular Info-->
+
+                    <h:form prependId="false" id="formVestibular2">
+
+                        <div align="center">
+                            <p:dialog header="View Vestibular" widgetVar="viewVestibularUpdate" minimizable="true" maximizable="true" focus="vestibular_info2">
+                                <h:panelGrid id="panel2" cellpadding="4" >
+
+
+                                    <p:outputLabel value="Vestibular Info.:"/>
+                                    <p:inputMask id="vestibular_info2" size="60" maxlength="8" disabled="#{mbVestibular.vestibular.vestibular_info != null}"
+                                                 required="true" requiredMessage="O campo [Vestibular Info] &eacute; obrigat&oacute;rio"
+                                                 mask="99999999" value="#{mbVestibular.vestibular.vestibular_info}" />
+
+
+                                    <p:outputLabel value="Descri&ccedil;&atilde;o do Vestibular.:"/>
+                                    <p:inputText id="vestibular_descricao2" size="40" maxlength="80" 
+                                                 value="#{mbVestibular.vestibular.vestibular_descricao}" required="true"
+                                                 requiredMessage="O campo [Descri&ccedil;&atilde;o do Vestibular] &eacute; obrigat&oacute;rio."/>
+
+                                    <p:outputLabel value="Sequ&ecirc;ncia do Vestibular.:"/>
+                                    <p:inputMask id="vestibular_seq_id2" size="40" maxlength="20" mask="999999999999" value="#{mbVestibular.vestibular.vestibular_seq_id}"
+                                                 disabled="#{mbVestibular.vestibular.vestibular_seq_id != null}" required="true" 
+                                                 requiredMessage="O campo [Sequ&ecirc;ncia do Vestibular] &eacute; obrigat&oacute;rio">
+                                    </p:inputMask>
+
+
+                                    <p:outputLabel value="In&iacute;cio do Vestibular.:" />
+                                    <p:calendar id="vestibular_inicio2" value="#{mbVestibular.vestibular.vestibular_inicio}" locale="pt" pattern="dd-MM-yyyy" mask="true" />
+
+
+                                    <p:outputLabel value="Valor.:" />
+                                    <p:inputText size="20" maxlength="13" id="parcela2" required="true" value="#{mbVestibular.vestibular.vestibular_valor}"  requiredMessage="Preencha este campo com o valor da parcela" >  
+                                        <f:convertNumber pattern="#,##0.00"></f:convertNumber>  
+                                        <p:ajax update="parcela2" process="parcela2" event="change" />  
+                                    </p:inputText>  
+
+
+                                    <p:outputLabel value="Fim do Vestibular.:" />
+                                    <p:calendar id="vestibular_fim2" value="#{mbVestibular.vestibular.vestibular_fim}" locale="pt" pattern="dd-MM-yyyy" mask="true" />
+
+
+                                    <p:outputLabel value="Dias para o Vencimento do Boleto.:"/>
+                                    <p:inputMask id="vestibular_dia2" size="40" maxlength="2" mask="9?9" value="#{mbVestibular.vestibular.vestibular_dia}">
+                                    </p:inputMask>
+
+
+
+                                </h:panelGrid>
+                                <p:panel style="text-align: center">
+                                    <p:commandButton value="Atualizar" action="#{mbVestibular.updateVestibular}"
+                                                     image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Limpar" disabled="#{mbVestibular.vestibular.vestibular_info != null}" >
+                                        <p:ajax update="panel2" resetValues="true" />
+                                    </p:commandButton>
+                                </p:panel>
+                            </p:dialog>
+                        </div>
+                    </h:form>
+
+                </p:tab>
+            </p:tabView>
+
+
+
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+                <p:dataTable id="idTabela" var="vestibular" value="#{mbVestibular.vestibulares}"
+                             paginator="true" rows="20" emptyMessage="Nenhum registro encontrado!"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30,50,100,200">
+
+                    <f:facet name="header">Lista de Vestibulares</f:facet>
+                    <p:column headerText="Id" filterBy="#{vestibular.vestibular_info}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_info}"/>
+                    </p:column>
+                    <p:column headerText="Descri&ccedil;&atilde;o do Vestibular" filterBy="#{vestibular.vestibular_descricao}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_descricao}"/>
+                    </p:column>
+                    <p:column headerText="Sequ&ecirc;ncia do Vestibular" filterBy="#{vestibular.vestibular_seq_id}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_seq_id}"/>
+                    </p:column>
+                    <p:column headerText="In&iacute;cio do Vestibular" filterBy="#{vestibular.vestibular_inicio}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_inicio}">
+                            <f:convertDateTime locale="pt,BR" pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Valor" filterBy="#{vestibular.vestibular_valor}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_valor}"/>
+                    </p:column>
+                    <p:column headerText="Fim do Vestibular" filterBy="#{vestibular.vestibular_fim}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_fim}">
+                            <f:convertDateTime locale="pt,BR" pattern="dd/MM/yyyy" /> 
+                        </h:outputText>
+
+                    </p:column>
+                    <p:column headerText="Dias para o Vencimento do Boleto" filterBy="#{vestibular.vestibular_dia}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{vestibular.vestibular_dia}"/>
+                    </p:column>
+                    <p:column style="width: 15%; text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="A&ccedil;&otilde;es"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" oncomplete="PF('viewVestibularUpdate').show();" update=":tbv1:formVestibular2" 
+                                         process="@this"
+                                         image="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbVestibular.vestibular}" value="#{vestibular}"/>
+                        </p:commandButton>
+
+                        <!-- Excluir -->
+                        <p:commandButton value="Remover" action="#{mbVestibular.deleteVestibular}" update="@form">
+
+                            <p:confirm header="Excluir Registro" message="Voc&ecirc; gostaria de deletar o registro?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{mbVestibular.vestibular}" value="#{vestibular}"/>
+
+                            <!-- DialogConfirm Excluir registro -->
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="N&atilde;o" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </p:commandButton>
+
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

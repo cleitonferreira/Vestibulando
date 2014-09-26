@@ -35,66 +35,66 @@ public class Inscricao implements Serializable {
     @Id
     @Column(name = "INSCRICAO_ID", nullable = false, length = 20)
     private Long inscricao_id;
-    @Column(name = "INSCRICAO_NOME", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_NOME", nullable = true, length = 80)
     private String inscricao_nome;
-    @Column(name = "INSCRICAO_NOME_MAE", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_NOME_MAE", nullable = true, length = 80)
     private String inscricao_nome_mae;
-    @Column(name = "INSCRICAO_NOME_PAI", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_NOME_PAI", nullable = true, length = 80)
     private String inscricao_nome_pai;
     @Column(name = "INSCRICAO_CPF", nullable = false, length = 14) //224.491.491-71
     private String inscricao_cpf;
-    @Column(name = "INSCRICAO_RG", nullable = false, length = 20)
+    @Column(name = "INSCRICAO_RG", nullable = true, length = 20)
     private String inscricao_rg;
-    @Column(name = "INSCRICAO_OE", nullable = false, length = 30)
+    @Column(name = "INSCRICAO_OE", nullable = true, length = 30)
     private String inscricao_oe;
-    @Column(name = "INSCRICAO_DATANASC", nullable = false)
+    @Column(name = "INSCRICAO_DATANASC", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date inscricao_datanasc;
-    @Column(name = "INSCRICAO_SEXO", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "INSCRICAO_SEXO", nullable = true, columnDefinition = "CHAR(1)")
     private String inscricao_sexo;
-    @Column(name = "INSCRICAO_NATURALIDADE", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_NATURALIDADE", nullable = true, length = 80)
     private String inscricao_naturalidade;
-    @Column(name = "INSCRICAO_ENDERECO", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_ENDERECO", nullable = true, length = 80)
     private String inscricao_endereco;
-    @Column(name = "INSCRICAO_BAIRRO", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_BAIRRO", nullable = true, length = 80)
     private String inscricao_bairro;
-    @Column(name = "INSCRICAO_CEP", nullable = false, length = 10) //27600-000
+    @Column(name = "INSCRICAO_CEP", nullable = true, length = 10) //27600-000
     private String inscricao_cep;
-    @Column(name = "INSCRICAO_TEL", nullable = false, length = 14)//(34)-8888-8888
+    @Column(name = "INSCRICAO_TEL", nullable = true, length = 14)//(34)-8888-8888
     private String inscricao_tel;
-    @Column(name = "INSCRICAO_CEL", nullable = false, length = 15)//(34)-88888-8888
+    @Column(name = "INSCRICAO_CEL", nullable = true, length = 15)//(34)-88888-8888
     private String inscricao_cel;
-    @Column(name = "INSCRICAO_EMAIL", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_EMAIL", nullable = true, length = 80)
     private String inscricao_email;
-    @Column(name = "INSCRICAO_ENEM", nullable = false)
+    @Column(name = "INSCRICAO_ENEM", nullable = true)
     private boolean inscricao_enem;
-    @Column(name = "INSCRICAO_NOTA_ENEM", nullable = false, precision = 8, scale = 2)
+    @Column(name = "INSCRICAO_NOTA_ENEM", nullable = true, precision = 8, scale = 2)
     private BigDecimal inscricao_nota_enem;
-    @Column(name = "INSCRICAO_ESCREVE_MAO", nullable = false, columnDefinition = "CHAR(1)")
+    @Column(name = "INSCRICAO_ESCREVE_MAO", nullable = true, columnDefinition = "CHAR(1)")
     private String inscricao_escreve_mao;
-    @Column(name = "INSCRICAO_PORTADOR_ESPECIAL", nullable = false)
+    @Column(name = "INSCRICAO_PORTADOR_ESPECIAL", nullable = true)
     private boolean inscricao_portador_especial;
-    @Column(name = "INSCRICAO_PORTADOR_DESCRICAO", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_PORTADOR_DESCRICAO", nullable = true, length = 80)
     private String inscricao_portador_descricao;
-    @Column(name = "INSCRICAO_ESCOLA", nullable = false, length = 80)
+    @Column(name = "INSCRICAO_ESCOLA", nullable = true, length = 80)
     private String inscricao_escola;
-    @Column(name = "INSCRICAO_INFO_ADICIONAL1", nullable = false, columnDefinition = "CHAR(10)")
+    @Column(name = "INSCRICAO_INFO_ADICIONAL1", nullable = true, columnDefinition = "CHAR(10)")
     private String inscricao_info_adicional1;
-    @Column(name = "INSCRICAO_INFO_ADICIONAL2", nullable = false, columnDefinition = "CHAR(10)")
+    @Column(name = "INSCRICAO_INFO_ADICIONAL2", nullable = true, columnDefinition = "CHAR(10)")
     private String inscricao_info_adicional2;
-    @Column(name = "INSCRICAO_INFO_ADICIONAL3", nullable = false, columnDefinition = "CHAR(10)")
+    @Column(name = "INSCRICAO_INFO_ADICIONAL3", nullable = true, columnDefinition = "CHAR(10)")
     private String inscricao_info_adicional3;
-    @Column(name = "INSCRICAO_INFO_ADICIONAL4", nullable = false, columnDefinition = "CHAR(10)")
+    @Column(name = "INSCRICAO_INFO_ADICIONAL4", nullable = true, columnDefinition = "CHAR(10)")
     private String inscricao_info_adicional4;
-    @Column(name = "INSCRICAO_PRESENCA", nullable = false)
+    @Column(name = "INSCRICAO_PRESENCA", nullable = true)
     private boolean inscricao_presenca;
-    @Column(name = "INSCRICAO_CLASSIFICACAO", nullable = false, length = 11)
+    @Column(name = "INSCRICAO_CLASSIFICACAO", nullable = true, length = 11)
     private Integer inscricao_classificacao;
-    @Column(name = "INSCRICAO_CLASSIFICACAO2", nullable = false, length = 11)
+    @Column(name = "INSCRICAO_CLASSIFICACAO2", nullable = true, length = 11)
     private Integer inscricao_classificacao2;
-    @Column(name = "INSCRICAO_ESPECIALIDADE", nullable = false, columnDefinition = "CHAR(2)")
+    @Column(name = "INSCRICAO_ESPECIALIDADE", nullable = true, columnDefinition = "CHAR(2)")
     private String inscricao_especialidade;
-    @Basic(optional = false)
+    @Basic(optional = true)
     //funcionando
 //    @Column(name = "INSCRICAO_DATACAD", insertable = false, updatable = false)
 //    @Temporal(TemporalType.TIMESTAMP)
@@ -105,39 +105,39 @@ public class Inscricao implements Serializable {
 
     //relacionamentos
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "EstadoInscricao")
-    @JoinColumn(name = "EST_ID", referencedColumnName = "est_id")
+    @ForeignKey(name = "FK_ESTADO_INSCRICAO")
+    @JoinColumn(name = "EST_ID", referencedColumnName = "est_id", nullable = true)
     private Estado estado;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "CidadeInscricao")
-    @JoinColumn(name = "CID_ID", referencedColumnName = "cid_id")
+    @ForeignKey(name = "FK_CIDADE_INSCICAO")
+    @JoinColumn(name = "CID_ID", referencedColumnName = "cid_id", nullable = true)
     private Cidade cidade;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "CursoInscricao")
-    @JoinColumn(name = "CURSO_ID", referencedColumnName = "curso_id")
+    @ForeignKey(name = "FK_CURSO_INCRICAO")
+    @JoinColumn(name = "CURSO_ID", referencedColumnName = "curso_id", nullable = true)
     private Curso curso;
 
     ////////////////////////////////////////////////////////////
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "CursoInscricao2")
-    @JoinColumn(name = "CURSO_ID2", referencedColumnName = "curso_id")
+    @ForeignKey(name = "FK_CURSO2_INSCRICAO")
+    @JoinColumn(name = "CURSO_ID2", referencedColumnName = "curso_id", nullable = true)
     private Curso curso2;
 
     ////////////////////////////////////////////////////////////
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "Local_Prova_Inscricao")
-    @JoinColumn(name = "PROVA_ID", referencedColumnName = "prova_id")
+    @ForeignKey(name = "FK_PROVA_INSCRICAO")
+    @JoinColumn(name = "PROVA_ID", referencedColumnName = "prova_id", nullable = true)
     private Local_Prova local_prova;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "VestibularInscricao")
-    @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info")
+    @ForeignKey(name = "FK_VESTIBULAR_INSCRICAO")
+    @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info", nullable = true)
     private Vestibular vestibular;
 
     @OneToMany(mappedBy = "inscricao", fetch = FetchType.LAZY)
-    @ForeignKey(name = "InscricaoResposta")
+    @ForeignKey(name = "FK_INCRICAO_RESPOSTA")
     private List<Resposta_Vestibular> resposta_vestibulares;
 
     public Inscricao() {
@@ -455,8 +455,8 @@ public class Inscricao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (this.inscricao_id != null ? this.inscricao_id.hashCode() : 0);
+        int hash = 5;
+        hash = 17 * hash + (this.inscricao_id != null ? this.inscricao_id.hashCode() : 0);
         return hash;
     }
 

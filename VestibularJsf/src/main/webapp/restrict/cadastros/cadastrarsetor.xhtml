@@ -17,17 +17,15 @@
 
                         <p:commandButton value="Novo Registro" action="#{mbSetor.limpSetor}" onclick="PF('viewSetor').show();" 
                                          type="button" styleClass="" icon="ui-icon-extlink" />
-                        
+
                         <p:button style="margin-left: 10px;" outcome="cadastrarsetor" value="Limpar Formul&aacute;rio" icon="ui-icon-star" />
 
-
-                        <p:growl id="msg0"/>
                         <div align="center">
                             <p:dialog header="View Setor" widgetVar="viewSetor" minimizable="true" maximizable="true" focus="set_nome">
                                 <h:panelGrid id="panel" columns="2" cellpadding="4" >
 
                                     <p:outputLabel/>
-                                    <h:inputHidden id="idsetor" value="#{mbSetor.setor.set_id}"/> 
+                                    <h:inputHidden id="set_id" value="#{mbSetor.setor.set_id}"/> 
 
                                     <p:outputLabel value="Setor.:"/>
                                     <p:inputText id="set_nome" size="40" maxlength="50" value="#{mbSetor.setor.set_nome}"
@@ -38,9 +36,13 @@
                                     <p:inputMask id="set_ramal" size="40" maxlength="4" mask="9999" value="#{mbSetor.setor.set_ramal}"
                                                  required="true" requiredMessage="O campo [Ramal] &eacute; obrigat&oacute;rio."/>
 
-                                    <p:outputLabel value="Respons&aacute;vel pelo Setor.:"/>
-                                    <p:inputText id="set_responsavel" size="40" maxlength="50" value="#{mbSetor.setor.set_responsavel}"
-                                                 onkeyup="this.value = this.value.toUpperCase()" />
+                                    <p:outputLabel value="Obs.:"/>
+                                    <p:inputTextarea id="cat_obs" rows="5" cols="30" counter="display" maxlength="100" value="#{mbSetor.setor.set_obs}"
+                                                     counterTemplate="{0} caracteres restantes." autoResize="false" >
+
+                                    </p:inputTextarea>
+                                    <br /><h:outputText id="display" />
+
 
                                 </h:panelGrid>
                                 <p:panel style="text-align: center;">
@@ -66,7 +68,7 @@
             <h:form id="formtable">
                 <p:growl id="msg1"/>
                 <p:dataTable id="idTabela" var="setor" value="#{mbSetor.setores}"
-                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado!"
+                             paginator="true" rows="20" emptyMessage="Nenhum registro encontrado!"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100,200">
@@ -81,8 +83,8 @@
                     <p:column headerText="Ramal" filterBy="#{setor.set_ramal}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{setor.set_ramal}"/>
                     </p:column>
-                    <p:column headerText="Respons&aacute;vel" filterBy="#{setor.set_responsavel}"  footerText="contains" filterMatchMode="contains">
-                        <h:outputText value="#{setor.set_responsavel}"/>
+                    <p:column headerText="Obs" filterBy="#{setor.set_obs}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{setor.set_obs}"/>
                     </p:column>
 
                     <p:column style="width: 15%; text-align: center;">

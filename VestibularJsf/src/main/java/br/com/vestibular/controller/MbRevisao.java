@@ -7,7 +7,7 @@ package br.com.vestibular.controller;
 
 import br.com.vestibular.model.dao.HibernateDAO;
 import br.com.vestibular.model.dao.InterfaceDAO;
-import br.com.vestibular.model.entities.Vestibular;
+import br.com.vestibular.model.entities.Revisao;
 import br.com.vestibular.util.FacesContextUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -20,109 +20,117 @@ import javax.faces.context.FacesContext;
  *
  * @author cleiton
  */
-@ManagedBean(name = "mbVestibular")
+@ManagedBean(name = "mbRevisao")
 @ViewScoped
-public class MbVestibular implements Serializable {
+public class MbRevisao implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Vestibular vestibular = new Vestibular();
-    private List<Vestibular> vestibulares;
-    private List<Vestibular> filteredVestibulares;
-    private List<Vestibular> consultaVestibulares;
+    private Revisao revisao = new Revisao();
+    private List<Revisao> revisoes;
+    private List<Revisao> filteredRevisoes;
+    private List<Revisao> consultaRevisoes;
 
-    public MbVestibular() {
+    public MbRevisao() {
     }
 
-    private InterfaceDAO<Vestibular> vestibularDAO() {
-        InterfaceDAO<Vestibular> vestibularDAO = new HibernateDAO<Vestibular>(Vestibular.class, FacesContextUtil.getRequestSession());
-        return vestibularDAO;
+    private InterfaceDAO<Revisao> revisaoDAO() {
+        InterfaceDAO<Revisao> revisaoDAO = new HibernateDAO<Revisao>(Revisao.class, FacesContextUtil.getRequestSession());
+        return revisaoDAO;
     }
 
-    public String limpVestibular() {
-        vestibular = new Vestibular();
-        return editVestibular();
+    public String limpRevisao() {
+        revisao = new Revisao();
+        return editRevisao();
     }
 
-    public String editVestibular() {
-        return "/restrict/cadastros/cadastrarvestibular.faces";
+    public String editRevisao() {
+        return "/restrict/cadastros/cadastrarrevisao.faces";
     }
 
+    public String addRevisao() {
+        // verifica a id veio igual a null ou id igual a 0
+        if (revisao.getRevisao_id() == null || revisao.getRevisao_id() == 0) {
+            insertRevisao();
+        } else {
+            updateRevisao();
+        }
+        limpRevisao();
+        return null;
+    }
 
-    public void insertVestibular() {
+    private void insertRevisao() {
         try {
-            vestibularDAO().save(vestibular);
+            revisaoDAO().save(revisao);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Cadastrar],  no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
-    public void updateVestibular() {
+    private void updateRevisao() {
         try {
-            vestibularDAO().update(vestibular);
+            revisaoDAO().update(revisao);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Atualizar], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
-    public void deleteVestibular() {
+    public void deleteRevisao() {
         try {
-            vestibularDAO().remove(vestibular);
+            revisaoDAO().remove(revisao);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Excluir], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
-
     }
 
-    public List<Vestibular> getVestibulares() {
-        vestibulares = vestibularDAO().getEntities();
-        return vestibulares;
+    public List<Revisao> getRevisoes() {
+        revisoes = revisaoDAO().getEntities();
+        return revisoes;
     }
 
-    public void setVestibulares(List<Vestibular> vestibulares) {
-        this.vestibulares = vestibulares;
+    public void setRevisoes(List<Revisao> revisoes) {
+        this.revisoes = revisoes;
     }
 
-    public Vestibular getVestibular() {
-        return vestibular;
+    public Revisao getRevisao() {
+        return revisao;
     }
 
-    public void setVestibular(Vestibular vestibular) {
-        this.vestibular = vestibular;
+    public void setRevisao(Revisao revisao) {
+        this.revisao = revisao;
     }
 
-    public List<Vestibular> getFilteredVestibulares() {
-        return filteredVestibulares;
+    public List<Revisao> getFilteredRevisoes() {
+        return filteredRevisoes;
     }
 
-    public void setFilteredVestibulares(List<Vestibular> filteredVestibulares) {
-        this.filteredVestibulares = filteredVestibulares;
+    public void setFilteredRevisoes(List<Revisao> filteredRevisoes) {
+        this.filteredRevisoes = filteredRevisoes;
     }
 
-    public List<Vestibular> getConsultaVestibulares() {
-        return consultaVestibulares;
+    public List<Revisao> getConsultaSetores() {
+        return consultaRevisoes;
     }
 
-    public void setConsultaVestibulares(List<Vestibular> consultaVestibulares) {
-        this.consultaVestibulares = consultaVestibulares;
+    public void setConsultaRevisoes(List<Revisao> consultaRevisoes) {
+        this.consultaRevisoes = consultaRevisoes;
     }
 
 }

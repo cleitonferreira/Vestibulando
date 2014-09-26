@@ -7,7 +7,7 @@ package br.com.vestibular.controller;
 
 import br.com.vestibular.model.dao.HibernateDAO;
 import br.com.vestibular.model.dao.InterfaceDAO;
-import br.com.vestibular.model.entities.Vestibular;
+import br.com.vestibular.model.entities.Local_Prova;
 import br.com.vestibular.util.FacesContextUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -20,109 +20,117 @@ import javax.faces.context.FacesContext;
  *
  * @author cleiton
  */
-@ManagedBean(name = "mbVestibular")
+@ManagedBean(name = "mbLocal_Prova")
 @ViewScoped
-public class MbVestibular implements Serializable {
+public class MbLocal_Prova implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Vestibular vestibular = new Vestibular();
-    private List<Vestibular> vestibulares;
-    private List<Vestibular> filteredVestibulares;
-    private List<Vestibular> consultaVestibulares;
+    private Local_Prova local_prova = new Local_Prova();
+    private List<Local_Prova> local_provas;
+    private List<Local_Prova> filteredLocal_Provas;
+    private List<Local_Prova> consultaLocal_Provas;
 
-    public MbVestibular() {
+    public MbLocal_Prova() {
     }
 
-    private InterfaceDAO<Vestibular> vestibularDAO() {
-        InterfaceDAO<Vestibular> vestibularDAO = new HibernateDAO<Vestibular>(Vestibular.class, FacesContextUtil.getRequestSession());
-        return vestibularDAO;
+    private InterfaceDAO<Local_Prova> local_provaDAO() {
+        InterfaceDAO<Local_Prova> local_provaDAO = new HibernateDAO<Local_Prova>(Local_Prova.class, FacesContextUtil.getRequestSession());
+        return local_provaDAO;
     }
 
-    public String limpVestibular() {
-        vestibular = new Vestibular();
-        return editVestibular();
+    public String limpLocal_Prova() {
+        local_prova = new Local_Prova();
+        return editLocal_Prova();
     }
 
-    public String editVestibular() {
-        return "/restrict/cadastros/cadastrarvestibular.faces";
+    public String editLocal_Prova() {
+        return "/restrict/cadastros/cadastrarlocalprova.faces";
     }
 
+    public String addLocal_Prova() {
+        // verifica a id veio igual a null ou id igual a 0
+        if (local_prova.getProva_id() == null || local_prova.getProva_id() == 0) {
+            insertLocal_Prova();
+        } else {
+            updateLocal_Prova();
+        }
+        limpLocal_Prova();
+        return null;
+    }
 
-    public void insertVestibular() {
+    private void insertLocal_Prova() {
         try {
-            vestibularDAO().save(vestibular);
+            local_provaDAO().save(local_prova);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Cadastrar],  no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
-    public void updateVestibular() {
+    private void updateLocal_Prova() {
         try {
-            vestibularDAO().update(vestibular);
+            local_provaDAO().update(local_prova);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Atualizar], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
+
     }
 
-    public void deleteVestibular() {
+    public void deleteLocal_Prova() {
         try {
-            vestibularDAO().remove(vestibular);
+            local_provaDAO().remove(local_prova);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso", ""));
-            limpVestibular();
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Excluir], no Banco de Dados", "" + ex));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
         }
-
     }
 
-    public List<Vestibular> getVestibulares() {
-        vestibulares = vestibularDAO().getEntities();
-        return vestibulares;
+    public List<Local_Prova> getLocal_provas() {
+        local_provas = local_provaDAO().getEntities();
+        return local_provas;
     }
 
-    public void setVestibulares(List<Vestibular> vestibulares) {
-        this.vestibulares = vestibulares;
+    public Local_Prova getLocal_prova() {
+        return local_prova;
     }
 
-    public Vestibular getVestibular() {
-        return vestibular;
+    public void setLocal_prova(Local_Prova local_prova) {
+        this.local_prova = local_prova;
     }
 
-    public void setVestibular(Vestibular vestibular) {
-        this.vestibular = vestibular;
+    public void setLocal_provas(List<Local_Prova> local_provas) {
+        this.local_provas = local_provas;
     }
 
-    public List<Vestibular> getFilteredVestibulares() {
-        return filteredVestibulares;
+    public List<Local_Prova> getFilteredLocal_Provas() {
+        return filteredLocal_Provas;
     }
 
-    public void setFilteredVestibulares(List<Vestibular> filteredVestibulares) {
-        this.filteredVestibulares = filteredVestibulares;
+    public void setFilteredLocal_Provas(List<Local_Prova> filteredLocal_Provas) {
+        this.filteredLocal_Provas = filteredLocal_Provas;
     }
 
-    public List<Vestibular> getConsultaVestibulares() {
-        return consultaVestibulares;
+    public List<Local_Prova> getConsultaLocal_Provas() {
+        return consultaLocal_Provas;
     }
 
-    public void setConsultaVestibulares(List<Vestibular> consultaVestibulares) {
-        this.consultaVestibulares = consultaVestibulares;
+    public void setConsultaLocal_Provas(List<Local_Prova> consultaLocal_Provas) {
+        this.consultaLocal_Provas = consultaLocal_Provas;
     }
 
 }

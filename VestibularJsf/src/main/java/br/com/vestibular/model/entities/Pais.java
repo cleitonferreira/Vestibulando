@@ -36,7 +36,7 @@ public class Pais implements Serializable {
     private String pa_sigla;
 
     @OneToMany(mappedBy = "pais", fetch = FetchType.LAZY)
-    @ForeignKey(name = "PaisEstado")
+    @ForeignKey(name = "FK_PAIS_ESTADO")
     private List<Estado> estados;
 
     public Pais() {

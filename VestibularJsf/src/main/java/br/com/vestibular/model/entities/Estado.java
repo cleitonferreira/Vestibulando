@@ -39,16 +39,16 @@ public class Estado implements Serializable {
 
     //relacionamentos
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "PaisEstado")
+    @ForeignKey(name = "FK_PAIS_ESTADO")
     @JoinColumn(name = "PA_ID", referencedColumnName = "pa_id")
     private Pais pais;
 
     @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
-    @ForeignKey(name = "EstadoCidade")
+    @ForeignKey(name = "FK_ESTADO_CIDADE")
     private List<Cidade> cidades;
 
     @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
-    @ForeignKey(name = "EstadoInscricao")
+    @ForeignKey(name = "FK_ESTADO_INSCRICAO")
     private List<Inscricao> inscricoes;
 
     public Estado() {
