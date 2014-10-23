@@ -8,37 +8,31 @@
         <!-- CONFIGURAÇÕES DE CONEXÃO COM O BD -->
         
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property><!-- Defino o driver de conexão com o bd -->
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/faa20?createDatabaseIfNotExist=true</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vestibular?createDatabaseIfNotExist=true</property>
         <property name="hibernate.connection.username">admin</property>
         <property name="hibernate.connection.password">admin</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         
         <!-- HABILITA A EXIBIÇÃO DO SQL GERADO PELO HIBERNATE E FORMATA-O -->
         
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
         
         <!-- HABILITA A ATUALIZAÇÃO AUTOMÁTICA DA ESTRUTURA DE TABELAS PELO HIBERNATE -->
         
         <property name="hibernate.hbm2ddl.auto">update</property>
         
-        
-        <!-- Tratamento do Cache dos Objetos-->
-        
+        <!-- Tratamento de Cache dos Objetos-->
         <property name="hibernate.cache.use_query_cache">false</property>
         <property name="hibernate.cache.use_second_level_cache">false</property>
         <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         
- 
-        <!-- CONFIGURAÇÕES DO POOL DE CONEXÕES-->
-        
-        <property name="c3p0.min_size">15</property>
+        <!-- CONFIGURAÇÕES DO POOL DE CONEXÕES-->     
+        <property name="c3p0.min_size">30</property>
         <property name="c3p0.max_size">50</property>
         <property name="c3p0.timeout">300</property>
         <property name="c3p0.max_statements">50</property>
         <property name="c3p0.idle_test_period">300</property>
-        
-
         
         <!-- LISTA DE ENTIDADES -->
         <mapping class="br.com.vestibular.model.entities.Pais"/>
@@ -56,7 +50,6 @@
         <mapping class="br.com.vestibular.model.entities.Local_Prova"/>
         <mapping class="br.com.vestibular.model.entities.Retorno"/>
         <mapping class="br.com.vestibular.model.entities.Revisao"/>
-
         
         
     </session-factory>

@@ -70,7 +70,6 @@
                             Visitante[VS] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </small>
 
-
                         <div align="center">
                             <p:dialog header="View Inscri&ccedil;&atilde;o" widgetVar="viewInscricao" minimizable="true" maximizable="true" focus="inscricao_nome" width="70%">
 
@@ -208,8 +207,8 @@
 
                                     <h:outputText value="Enem.:" />
                                     <p:selectOneButton id="inscricao_enem" value="#{mbInscVestibular.inscricao.inscricao_enem}">
-                                        <f:selectItem itemLabel="N&atilde;o" itemValue="false" />
-                                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
                                     </p:selectOneButton>
 
 
@@ -222,8 +221,8 @@
 
                                     <p:outputLabel value="Portador de Necessidade Especial.:" />
                                     <p:selectOneRadio id="inscricao_portador_especial" value="#{mbInscVestibular.inscricao.inscricao_portador_especial}">
-                                        <f:selectItem itemLabel="N&atilde;o" itemValue="false" />
-                                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
                                     </p:selectOneRadio>
 
                                     <p:outputLabel value="Necessidade Especial.:"/>
@@ -283,9 +282,6 @@
                     <p:column headerText="Curso 1" filterBy="#{inscricao.curso.curso_nome}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.curso.curso_nome}"/>
                     </p:column>
-                    <p:column headerText="Curso 2" filterBy="#{inscricao.curso2.curso_nome}"  footerText="contains" filterMatchMode="contains">
-                        <h:outputText value="#{inscricao.curso2.curso_nome}"/>
-                    </p:column>
                     <p:column headerText="Estado" filterBy="#{inscricao.estado.est_nome}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.estado.est_nome}"/>
                     </p:column>
@@ -295,11 +291,14 @@
                     <p:column headerText="Local da Prova" filterBy="#{inscricao.local_prova.prova_cidade}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.local_prova.prova_cidade}"/>
                     </p:column>
-                    <p:column headerText="Nome" filterBy="#{inscricao.inscricao_nome}"  footerText="contains" filterMatchMode="contains">
+                    <p:column headerText="Nome" filterBy="#{inscricao.inscricao_nome}" style="width: 18%;"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.inscricao_nome}"/>
                     </p:column>
                     <p:column headerText="Cpf" filterBy="#{inscricao.inscricao_cpf}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.inscricao_cpf}"/>
+                    </p:column>
+                    <p:column headerText="Enem" filterBy="#{inscricao.inscricao_enem == '1' ? 'Sim' : 'N&atilde;o'}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.inscricao_enem == '1' ? 'Sim' : 'N&atilde;o'}"/>
                     </p:column>
 
                     <p:column style="width: 15%; text-align: center;">
@@ -310,13 +309,15 @@
                                          onclick="PF('notificacao').show()"
                                          image="ui-icon ui-icon-pencil" value="Editar">
                             <f:setPropertyActionListener target="#{mbInscVestibular.inscricao}" value="#{inscricao}"/>
+                            <p:ajax update=":tbv1:formInscricao:cidade" listener="#{mbInscVestibular.listaCidades}"/>
+                            <f:setPropertyActionListener target="#{mbInscVestibular.estado}" value="#{inscricao.estado}" />
+                            <f:setPropertyActionListener target="#{mbInscVestibular.cidade}" value="#{inscricao.cidade}" />
                             <f:setPropertyActionListener target="#{mbInscVestibular.vestibular}" value="#{inscricao.vestibular}" />
                             <f:setPropertyActionListener target="#{mbInscVestibular.curso}" value="#{inscricao.curso}" />
                             <f:setPropertyActionListener target="#{mbInscVestibular.curso2}" value="#{inscricao.curso2}" />
                             <f:setPropertyActionListener target="#{mbInscVestibular.local_prova}" value="#{inscricao.local_prova}" />
-                            <p:ajax update=":tbv1:formInscricao:cidade" listener="#{mbInscVestibular.listaCidades}"/>
-                            <f:setPropertyActionListener target="#{mbInscVestibular.estado}" value="#{inscricao.estado}" />
-                            <f:setPropertyActionListener target="#{mbInscVestibular.cidade}" value="#{inscricao.cidade}" />
+
+
                         </p:commandButton>
 
                         <!--                         Excluir -->

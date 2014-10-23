@@ -5,8 +5,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui"
-      ><!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
+      xmlns:p="http://primefaces.org/ui">
+    <!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
 
     <h:head>
         <title>VestibularJsf - Sistema JSF e Maven</title>
@@ -91,6 +91,7 @@
                             <p:menuitem  value="Vestibular" url="/restrict/cadastros/cadastrarvestibular.faces"/>
                             <p:menuitem  value="Curso" url="/restrict/cadastros/cadastrarcurso.faces"/>
                             <p:menuitem  value="Loca de Prova" url="/restrict/cadastros/cadastrarlocalprova.faces"/>
+                            <p:menuitem  value="Arquivo de Retorno" url="/restrict/boletos/retornoupload.faces"/>
                         </p:submenu> 
                         <p:submenu label="Inscri&ccedil;&otilde;es">
                             <p:menuitem  value="Vestibular" url="/restrict/cadastros/vestibular.faces"/>
@@ -98,10 +99,11 @@
                         </p:submenu>
                         <p:submenu label="Consultas">
                             <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
-                            <p:menuitem value="Usuarios" url="/restrict/consultas/consultarusuarios.faces"/>
+                            <p:menuitem value="Usuarios" url="/restrict/boletos/consultarusuarios.faces"/>
                             <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
                             <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
                             <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
+                            <p:menuitem value="Boletos" url="/restrict/boletos/consultarboletos.faces"/>
                         </p:submenu>
                         <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
 

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../../resources/main.xhtml">
+
+    <ui:define name="tarefas">
+        <h:form>
+            <p:growl id="msg0"/>
+            <p:dataTable id="idTabela" var="boleto" value="#{mbBoleto.boletos}" 
+                         selectionMode="multiple" selection="#{mbBoleto.consultaBoletos}" rowKey="#{boleto.boleto_id}"
+                         paginator="true" rows="50" paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         widgetVar="boletoTable" rowsPerPageTemplate="25,50,100,200"
+                         emptyMessage="Nenhum registro encontrado!" filteredValue="#{mbBoleto.filteredBoletos}">
+
+                <f:facet name="header">Lista de Boletos
+                    <p:outputPanel style=" float: right;">Pesquisar:
+                        <p:inputText style="height: 15px; text-align: right; margin-bottom: -3px;" id="globalFilter" onkeyup="PF('boletoTable').filter()" placeholder="..."/>
+                    </p:outputPanel>
+                </f:facet>
+
+
+                <p:column headerText="Id" filterBy="#{boleto.boleto_id}" style="width: 5%;">
+                    <h:outputText value="#{boleto.boleto_id}"/>
+                </p:column>
+
+                <p:column headerText="Vestibular" filterBy="#{boleto.vestibular.vestibular_descricao}">
+                    <h:outputText value="#{boleto.vestibular.vestibular_descricao}"/>
+                </p:column>
+
+                <p:column headerText="Inscri&ccedil;&atilde;o" filterBy="#{boleto.inscricao_id}">
+                    <h:outputText value="#{boleto.inscricao_id}"/>
+                </p:column>
+
+                <p:column headerText="Dt. Vencimento" filterBy="#{boleto.boleto_dt_venc}">
+                    <h:outputText value="#{boleto.boleto_dt_venc}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Valor Boleto" filterBy="#{boleto.boleto_vl_boleto}">
+                    <h:outputText value="#{boleto.boleto_vl_boleto}"/>
+                </p:column>
+
+                <p:column headerText="Nr. Conv" filterBy="#{boleto.boleto_nr_conv}">
+                    <h:outputText value="#{boleto.boleto_nr_conv}"/>
+                </p:column>
+
+                <p:column headerText="Nosso N&uacute;mero" filterBy="#{boleto.boleto_nossonumero}">
+                    <h:outputText value="#{boleto.boleto_nossonumero}"/>
+                </p:column>
+
+                <p:column headerText="Dt. Pagamento" filterBy="#{boleto.boleto_data_pgto}">
+                    <h:outputText value="#{boleto.boleto_data_pgto}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Boleto Pago" filterBy="#{boleto.boleto_pago}">
+                    <h:outputText value="#{boleto.boleto_pago}"/>
+                </p:column>
+
+                <p:column headerText="Dt. Cr&eacute;dito" filterBy="#{boleto.boleto_dt_credito}">
+                    <h:outputText value="#{boleto.boleto_dt_credito}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                    </h:outputText>
+                </p:column>
+
+                <f:facet name="footer">
+                    <p:commandButton process="idTabela" style="float: left; margin-top: -45px; position: relative;" update=":form:infoBoleto" icon="ui-icon-search" value="View" oncomplete="PF('boletoDialog').show()" />
+                </f:facet>
+
+            </p:dataTable>
+
+            <h:commandLink>  
+                <p:graphicImage value="./../../resources/icons/excel.png" />  
+                <p:dataExporter type="xls" target="idTabela" fileName="boletos"  />  
+            </h:commandLink>  
+            &nbsp;
+            <h:commandLink>  
+                <p:graphicImage value="./../../resources/icons/pdf.png" />  
+                <p:dataExporter type="pdf" target="idTabela" fileName="boletos"/>  
+            </h:commandLink>  
+            &nbsp;
+            <h:commandLink>  
+                <p:graphicImage value="./../../resources/icons/xls.png" />  
+                <p:dataExporter type="csv" target="idTabela" fileName="boletos" />  
+            </h:commandLink>  
+            &nbsp;
+            <h:commandLink>  
+                <p:graphicImage value="./../../resources/icons/xml.png" />  
+                <p:dataExporter type="xml" target="idTabela" fileName="boletos" />  
+            </h:commandLink> 
+
+
+        </h:form>
+
+
+
+        <h:form id="form">
+            <p:dialog header="Informa&ccedil;&otilde;es sobre o Boleto" widgetVar="boletoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="400">
+                <p:outputPanel id="infoBoleto">
+                    <ui:repeat value="#{mbBoleto.consultaBoletos}" var="boleto">
+                        <h:outputText value=" Id: #{boleto.boleto_id}" style="display:block"/>
+                        <h:outputText value=" Vestibular: #{boleto.vestibular.vestibular_descricao}" style="display:block"/>
+                        <h:outputText value=" Inscri&ccedil;&atilde;o: #{boleto.inscricao_id}" style="display:block"/>
+                        <h:outputText value=" Dt. Vencimento: #{boleto.boleto_dt_venc}" style="display:block"/>
+                        <h:outputText value=" Valor do Boleto: #{boleto.boleto_vl_boleto}" style="display:block"/>
+                        <h:outputText value=" Nr. Documento: #{boleto.boleto_nr_doc}" style="display:block"/>
+                        <h:outputText value=" Nr. Conv&ecirc;nio: #{boleto.boleto_nr_conv}" style="display:block"/>
+                        <h:outputText value=" Nosso N&uacute;mero: #{boleto.boleto_nossonumero}" style="display:block"/>
+                        <h:outputText value=" Dt. Documento: #{boleto.boleto_dt_doc}" style="display:block"/>
+                        <h:outputText value=" Dt. Validade: #{boleto.boleto_dt_val}" style="display:block"/>
+                        <h:outputText value=" Dt. Pagamento: #{boleto.boleto_data_pgto}" style="display:block"/>
+                        <h:outputText value=" Instru&ccedil;&atilde;o: #{boleto.boleto_instrucao}" style="display:block"/>
+                        <h:outputText value=" Boleto Pago: #{boleto.boleto_pago}" style="display:block"/>
+                        <h:outputText value=" Dt. Cr&eacute;dito: #{boleto.boleto_dt_credito}" style="display:block"/>
+                        <h:outputText value=" Dt. Arquivo: #{boleto.boleto_dt_arquivo}" style="display:block"/>
+                        <h:outputText value=" Nr. Retorno: #{boleto.boleto_nr_retorno}" style="display:block"/>
+                        <h:outputText value=" Linha Retorno: #{boleto.boleto_linha_retorno}" style="display:block"/>
+                        <br />
+                    </ui:repeat>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

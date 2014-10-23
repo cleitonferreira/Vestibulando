@@ -37,9 +37,9 @@ public class Curso implements Serializable {
     @Column(name = "CURSO_REFERENCIA", nullable = true, length = 20)
     private String curso_referencia;
     @Column(name = "CURSO_EXTENSAO", nullable = true, columnDefinition = "TINYINT(1)")
-    private Integer curso_extensao;
+    private String curso_extensao;
     @Column(name = "CURSO_FLAG", nullable = true, columnDefinition = "TINYINT(1)")
-    private Integer curso_flag;
+    private String curso_flag;
 
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     @ForeignKey(name = "FK_CURSO_INCRICAO")
@@ -84,19 +84,19 @@ public class Curso implements Serializable {
         this.curso_referencia = curso_referencia;
     }
 
-    public Integer getCurso_extensao() {
+    public String getCurso_extensao() {
         return curso_extensao;
     }
 
-    public void setCurso_extensao(Integer curso_extensao) {
+    public void setCurso_extensao(String curso_extensao) {
         this.curso_extensao = curso_extensao;
     }
 
-    public Integer getCurso_flag() {
+    public String getCurso_flag() {
         return curso_flag;
     }
 
-    public void setCurso_flag(Integer curso_flag) {
+    public void setCurso_flag(String curso_flag) {
         this.curso_flag = curso_flag;
     }
 
@@ -118,8 +118,8 @@ public class Curso implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + (this.curso_id != null ? this.curso_id.hashCode() : 0);
+        int hash = 5;
+        hash = 29 * hash + (this.curso_id != null ? this.curso_id.hashCode() : 0);
         return hash;
     }
 

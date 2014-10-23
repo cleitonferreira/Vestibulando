@@ -208,8 +208,8 @@
 
                                     <h:outputText value="Enem.:" />
                                     <p:selectOneButton id="inscricao_enem" value="#{mbInscVestibularMed.inscricao.inscricao_enem}">
-                                        <f:selectItem itemLabel="N&atilde;o" itemValue="false" />
-                                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
                                     </p:selectOneButton>
 
 
@@ -222,8 +222,8 @@
 
                                     <p:outputLabel value="Portador de Necessidade Especial.:" />
                                     <p:selectOneRadio id="inscricao_portador_especial" value="#{mbInscVestibularMed.inscricao.inscricao_portador_especial}">
-                                        <f:selectItem itemLabel="N&atilde;o" itemValue="false" />
-                                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
                                     </p:selectOneRadio>
 
                                     <p:outputLabel value="Necessidade Especial.:"/>

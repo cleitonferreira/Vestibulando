@@ -195,7 +195,7 @@ public class MbInscVestibularMed implements Serializable {
     //realizar as modificações.
     public List<Inscricao> getInscricoes() {
         // vest_info do vestibular da Medicina
-        String vest_info = "20140103";
+        String vest_info = "'20140103'";
         inscricoes = dao.inscritosVestibularMedicina(vest_info);
         return inscricoes;
     }

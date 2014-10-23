@@ -33,7 +33,7 @@ public class Inscricao implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "INSCRICAO_ID", nullable = false, length = 20)
+    @Column(name = "INSCRICAO_ID", nullable = true, length = 20, insertable = false, updatable = false)
     private Long inscricao_id;
     @Column(name = "INSCRICAO_NOME", nullable = true, length = 80)
     private String inscricao_nome;
@@ -56,6 +56,8 @@ public class Inscricao implements Serializable {
     private String inscricao_naturalidade;
     @Column(name = "INSCRICAO_ENDERECO", nullable = true, length = 80)
     private String inscricao_endereco;
+    @Column(name = "INSCRICAO_NUMERO", nullable = true, length = 10)
+    private String inscricao_numero;
     @Column(name = "INSCRICAO_BAIRRO", nullable = true, length = 80)
     private String inscricao_bairro;
     @Column(name = "INSCRICAO_CEP", nullable = true, length = 10) //27600-000
@@ -66,14 +68,14 @@ public class Inscricao implements Serializable {
     private String inscricao_cel;
     @Column(name = "INSCRICAO_EMAIL", nullable = true, length = 80)
     private String inscricao_email;
-    @Column(name = "INSCRICAO_ENEM", nullable = true)
-    private boolean inscricao_enem;
+    @Column(name = "INSCRICAO_ENEM", nullable = true, columnDefinition = "TINYINT(1)")
+    private String inscricao_enem;
     @Column(name = "INSCRICAO_NOTA_ENEM", nullable = true, precision = 8, scale = 2)
     private BigDecimal inscricao_nota_enem;
     @Column(name = "INSCRICAO_ESCREVE_MAO", nullable = true, columnDefinition = "CHAR(1)")
     private String inscricao_escreve_mao;
-    @Column(name = "INSCRICAO_PORTADOR_ESPECIAL", nullable = true)
-    private boolean inscricao_portador_especial;
+    @Column(name = "INSCRICAO_PORTADOR_ESPECIAL", nullable = true, columnDefinition = "TINYINT(1)")
+    private String inscricao_portador_especial;
     @Column(name = "INSCRICAO_PORTADOR_DESCRICAO", nullable = true, length = 80)
     private String inscricao_portador_descricao;
     @Column(name = "INSCRICAO_ESCOLA", nullable = true, length = 80)
@@ -86,8 +88,8 @@ public class Inscricao implements Serializable {
     private String inscricao_info_adicional3;
     @Column(name = "INSCRICAO_INFO_ADICIONAL4", nullable = true, columnDefinition = "CHAR(10)")
     private String inscricao_info_adicional4;
-    @Column(name = "INSCRICAO_PRESENCA", nullable = true)
-    private boolean inscricao_presenca;
+    @Column(name = "INSCRICAO_PRESENCA", nullable = true, columnDefinition = "TINYINT(1)")
+    private String inscricao_presenca;
     @Column(name = "INSCRICAO_CLASSIFICACAO", nullable = true, length = 11)
     private Integer inscricao_classificacao;
     @Column(name = "INSCRICAO_CLASSIFICACAO2", nullable = true, length = 11)
@@ -99,20 +101,15 @@ public class Inscricao implements Serializable {
 //    @Column(name = "INSCRICAO_DATACAD", insertable = false, updatable = false)
 //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date inscricao_datacad;
-    @Column(name = "INSCRICAO_DATACAD", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "INSCRICAO_DATACAD", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inscricao_datacad;
 
     //relacionamentos
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "FK_ESTADO_INSCRICAO")
-    @JoinColumn(name = "EST_ID", referencedColumnName = "est_id", nullable = true)
-    private Estado estado;
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "FK_CIDADE_INSCICAO")
-    @JoinColumn(name = "CID_ID", referencedColumnName = "cid_id", nullable = true)
-    private Cidade cidade;
+    @ForeignKey(name = "FK_VESTIBULAR_INSCRICAO")
+    @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info", nullable = true)
+    private Vestibular vestibular;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @ForeignKey(name = "FK_CURSO_INCRICAO")
@@ -132,21 +129,26 @@ public class Inscricao implements Serializable {
     private Local_Prova local_prova;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name = "FK_VESTIBULAR_INSCRICAO")
-    @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info", nullable = true)
-    private Vestibular vestibular;
+    @ForeignKey(name = "FK_ESTADO_INSCRICAO")
+    @JoinColumn(name = "EST_ID", referencedColumnName = "est_id", nullable = true)
+    private Estado estado;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_CIDADE_INSCICAO")
+    @JoinColumn(name = "CID_ID", referencedColumnName = "cid_id", nullable = true)
+    private Cidade cidade;
 
     @OneToMany(mappedBy = "inscricao", fetch = FetchType.LAZY)
     @ForeignKey(name = "FK_INCRICAO_RESPOSTA")
     private List<Resposta_Vestibular> resposta_vestibulares;
 
     public Inscricao() {
-        this.estado = new Estado();
-        this.cidade = new Cidade();
+        this.vestibular = new Vestibular();
         this.curso = new Curso();
         this.curso2 = new Curso();
         this.local_prova = new Local_Prova();
-        this.vestibular = new Vestibular();
+        this.estado = new Estado();
+        this.cidade = new Cidade();
     }
 
     public Long getInscricao_id() {
@@ -237,6 +239,14 @@ public class Inscricao implements Serializable {
         this.inscricao_endereco = inscricao_endereco;
     }
 
+    public String getInscricao_numero() {
+        return inscricao_numero;
+    }
+
+    public void setInscricao_numero(String inscricao_numero) {
+        this.inscricao_numero = inscricao_numero;
+    }
+
     public String getInscricao_bairro() {
         return inscricao_bairro;
     }
@@ -277,11 +287,11 @@ public class Inscricao implements Serializable {
         this.inscricao_email = inscricao_email;
     }
 
-    public boolean isInscricao_enem() {
+    public String getInscricao_enem() {
         return inscricao_enem;
     }
 
-    public void setInscricao_enem(boolean inscricao_enem) {
+    public void setInscricao_enem(String inscricao_enem) {
         this.inscricao_enem = inscricao_enem;
     }
 
@@ -301,11 +311,11 @@ public class Inscricao implements Serializable {
         this.inscricao_escreve_mao = inscricao_escreve_mao;
     }
 
-    public boolean isInscricao_portador_especial() {
+    public String getInscricao_portador_especial() {
         return inscricao_portador_especial;
     }
 
-    public void setInscricao_portador_especial(boolean inscricao_portador_especial) {
+    public void setInscricao_portador_especial(String inscricao_portador_especial) {
         this.inscricao_portador_especial = inscricao_portador_especial;
     }
 
@@ -357,11 +367,11 @@ public class Inscricao implements Serializable {
         this.inscricao_info_adicional4 = inscricao_info_adicional4;
     }
 
-    public boolean isInscricao_presenca() {
+    public String getInscricao_presenca() {
         return inscricao_presenca;
     }
 
-    public void setInscricao_presenca(boolean inscricao_presenca) {
+    public void setInscricao_presenca(String inscricao_presenca) {
         this.inscricao_presenca = inscricao_presenca;
     }
 
@@ -397,20 +407,12 @@ public class Inscricao implements Serializable {
         this.inscricao_datacad = inscricao_datacad;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public Vestibular getVestibular() {
+        return vestibular;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
+    public void setVestibular(Vestibular vestibular) {
+        this.vestibular = vestibular;
     }
 
     public Curso getCurso() {
@@ -437,12 +439,20 @@ public class Inscricao implements Serializable {
         this.local_prova = local_prova;
     }
 
-    public Vestibular getVestibular() {
-        return vestibular;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setVestibular(Vestibular vestibular) {
-        this.vestibular = vestibular;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 
     public List<Resposta_Vestibular> getResposta_vestibulares() {
@@ -456,7 +466,7 @@ public class Inscricao implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 17 * hash + (this.inscricao_id != null ? this.inscricao_id.hashCode() : 0);
+        hash = 67 * hash + (this.inscricao_id != null ? this.inscricao_id.hashCode() : 0);
         return hash;
     }
 
@@ -474,7 +484,5 @@ public class Inscricao implements Serializable {
         }
         return true;
     }
-
-    
 
 }

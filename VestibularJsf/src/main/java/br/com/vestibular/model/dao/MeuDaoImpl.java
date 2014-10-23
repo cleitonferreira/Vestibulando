@@ -53,7 +53,7 @@ public class MeuDaoImpl implements MeuDao, Serializable {
     @Override
     public Object consultaCpf(String cpf, String vestinfo) {
 //        System.out.println("Variavel>>>>>>" + cpf);
-        SQLQuery sql = FacesContextUtil.getRequestSession().createSQLQuery("SELECT COUNT(*) FROM `INSCRICAO` WHERE `VESTIBULAR_INFO` = " + vestinfo + " AND `INSCRICAO_CPF` = " + cpf);
+        SQLQuery sql = FacesContextUtil.getRequestSession().createSQLQuery("SELECT COUNT(*) FROM INSCRICAO WHERE VESTIBULAR_INFO = '" + vestinfo + "' AND INSCRICAO_CPF = " + "'" + cpf + "'");
 //        projList.add(Projections.count("pes_cpf"), cpf);
 //        crit.setProjection(projList);
 //        List results = crit.list();
@@ -117,9 +117,11 @@ public class MeuDaoImpl implements MeuDao, Serializable {
     @Override
     public List<Curso> consultaTodosCursos(String cursoreferencia) {
         Criteria crit = FacesContextUtil.getRequestSession().createCriteria(Curso.class);
-        // where curso_flag = 1
-        crit.add(Restrictions.eq("curso_referencia", cursoreferencia));
-        crit.add(Restrictions.eq("curso_flag", 1));
+//        String varflag = "%" + true + "%";
+        String varcurso = "%" + cursoreferencia + "%";
+        crit.add(Restrictions.eq("curso_flag", "1"));
+        crit.add(Restrictions.ilike("curso_referencia", varcurso));
+
         return crit.list();
     }
 
@@ -135,7 +137,6 @@ public class MeuDaoImpl implements MeuDao, Serializable {
 //        crit.add(Restrictions.eq("curso_flag", 1));
 //        return crit.list();
 //    }
-
     @Override
     public Local_Prova getByIdLocal_Prova(Integer id) {
         return (Local_Prova) FacesContextUtil.getRequestSession().get(Local_Prova.class, id);
@@ -156,9 +157,9 @@ public class MeuDaoImpl implements MeuDao, Serializable {
 //    }
     @Override
     public List<Inscricao> inscritosVestibularMedicina(String vest_info) {
-        Criteria crit = FacesContextUtil.getRequestSession().createCriteria(Inscricao.class)
-                .createCriteria("vestibular");
-        crit.add(Restrictions.eq("vestibular_info", vest_info));
+        Criteria crit = FacesContextUtil.getRequestSession().createCriteria(Inscricao.class).createCriteria("vestibular");
+        String var = "%" + vest_info + "%";
+        crit.add(Restrictions.eq("vestibular_info", var));
 
 //        chave estrangeira criteria
 //        http://www.mballem.com/post/consultas-com-hibernate-e-a-api-criteria-parte-ii
@@ -167,9 +168,9 @@ public class MeuDaoImpl implements MeuDao, Serializable {
 
     @Override
     public List<Inscricao> inscritosVestibular(String vest_info) {
-        Criteria crit = FacesContextUtil.getRequestSession().createCriteria(Inscricao.class)
-                .createCriteria("vestibular");
-        crit.add(Restrictions.eq("vestibular_info", vest_info));
+        Criteria crit = FacesContextUtil.getRequestSession().createCriteria(Inscricao.class).createCriteria("vestibular");
+        String var = "%" + vest_info + "%";
+        crit.add(Restrictions.ilike("vestibular_info", var));
         return crit.list();
     }
 

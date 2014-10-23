@@ -33,8 +33,8 @@ public class Resposta_Vestibular implements Serializable {
     @GeneratedValue
     @Column(name = "RESPOSTA_ID", nullable = false)
     private Integer resposta_id;
-    @Column(name = "RESPOSTA_FLAG", nullable = true, length = 1)
-    private Boolean resposta_flag;
+    @Column(name = "RESPOSTA_FLAG", nullable = true, columnDefinition = "TINYINT(1)")
+    private String resposta_flag;
     @Column(name = "RESPOSTA_DATACAD", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date resposta_datacad;
@@ -161,11 +161,11 @@ public class Resposta_Vestibular implements Serializable {
         this.resposta_id = resposta_id;
     }
 
-    public Boolean isResposta_flag() {
+    public String getResposta_flag() {
         return resposta_flag;
     }
 
-    public void setResposta_flag(Boolean resposta_flag) {
+    public void setResposta_flag(String resposta_flag) {
         this.resposta_flag = resposta_flag;
     }
 
@@ -587,22 +587,22 @@ public class Resposta_Vestibular implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + (this.resposta_id != null ? this.resposta_id.hashCode() : 0);
+        int hash = 3;
+        hash = 71 * hash + (this.resposta_id != null ? this.resposta_id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
-            return true;
+            return false;
         }
         if (getClass() != obj.getClass()) {
-            return true;
+            return false;
         }
         final Resposta_Vestibular other = (Resposta_Vestibular) obj;
         if (this.resposta_id != other.resposta_id && (this.resposta_id == null || !this.resposta_id.equals(other.resposta_id))) {
-            return true;
+            return false;
         }
         return true;
     }

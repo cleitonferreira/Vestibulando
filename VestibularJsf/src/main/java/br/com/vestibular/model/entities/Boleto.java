@@ -33,12 +33,8 @@ public class Boleto implements Serializable {
     @GeneratedValue
     @Column(name = "BOLETO_ID", nullable = false)
     private Integer boleto_id;
-    
-    //Na classe Boleto o atributo inscricao_id nao 
-    //pode haver relacionamentos por causa da trigger
     @Column(name = "INSCRICAO_ID", nullable = true, length = 20)
     private Long inscricao_id;
-    
     @Column(name = "BOLETO_DT_VENC", nullable = true, length = 10)
     private String boleto_dt_venc;
     @Column(name = "BOLETO_VL_BOLETO", nullable = true, precision = 10, scale = 2)
@@ -56,7 +52,7 @@ public class Boleto implements Serializable {
     @Column(name = "BOLETO_DATA_PGTO", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date boleto_data_pgto;
-    @Column(name = "BOLETO_INSTRUCAO", nullable = true, columnDefinition="Text")
+    @Column(name = "BOLETO_INSTRUCAO", nullable = true, columnDefinition = "Text")
     private String boleto_instrucao;
     @Column(name = "BOLETO_PAGO", nullable = true, precision = 10, scale = 2)
     private BigDecimal boleto_pago;
@@ -71,7 +67,8 @@ public class Boleto implements Serializable {
     @Column(name = "BOLETO_LINHA_RETORNO", nullable = true, length = 6)
     private String boleto_linha_retorno;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    //relacionamentos
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @ForeignKey(name = "FK_BOLETO_VESTIBULAR")
     @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info")
     private Vestibular vestibular;
@@ -219,7 +216,7 @@ public class Boleto implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + (this.boleto_id != null ? this.boleto_id.hashCode() : 0);
+        hash = 67 * hash + (this.boleto_id != null ? this.boleto_id.hashCode() : 0);
         return hash;
     }
 
@@ -239,6 +236,5 @@ public class Boleto implements Serializable {
     }
 
     
-    
-    
+
 }

@@ -16,7 +16,6 @@ import br.com.vestibular.model.entities.Local_Prova;
 import br.com.vestibular.model.entities.Vestibular;
 import br.com.vestibular.util.FacesContextUtil;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -198,7 +197,7 @@ public class MbInscVestibular implements Serializable {
     //realizar as modificações.
     public List<Inscricao> getInscricoes() {
         // vest_info do Vestibular Normal
-        String vest_info = "20140101";
+        String vest_info = "20150101";
         inscricoes = dao.inscritosVestibular(vest_info);
         return inscricoes;
     }
