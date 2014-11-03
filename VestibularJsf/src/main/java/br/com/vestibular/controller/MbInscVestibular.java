@@ -36,6 +36,7 @@ public class MbInscVestibular implements Serializable {
 
     private Inscricao inscricao = new Inscricao();
     private List<Inscricao> inscricoes;
+    private List quantIncritosVestibular;
     private List<Inscricao> filteredInscricoes;
     private List<Inscricao> consultaInscricoes;
 
@@ -99,8 +100,8 @@ public class MbInscVestibular implements Serializable {
     public String addInscricao() {
 
 //        Date date = new Date();
-        String cpf = inscricao.getInscricao_cpf().toString();
-        String vestinfo = vestibular.getVestibular_info().toString();
+        String cpf = inscricao.getInscricao_cpf();
+        String vestinfo = vestibular.getVestibular_info();
         Object resultado = dao.consultaCpf(cpf, vestinfo);
         //System.out.println("Resultado >>>>" + resultado.toString());
 
@@ -164,8 +165,6 @@ public class MbInscVestibular implements Serializable {
             inscricao.setCurso(curso);
             inscricao.setCurso2(curso2);
             inscricao.setLocal_prova(local_prova);
-            inscricao.setEstado(estado);
-            inscricao.setCidade(cidade);
             inscricaoDAO().update(inscricao);
 
             FacesContext.getCurrentInstance().addMessage(null,
@@ -196,7 +195,7 @@ public class MbInscVestibular implements Serializable {
     //tomar cuidado com esses dois get aqui
     //realizar as modificações.
     public List<Inscricao> getInscricoes() {
-        // vest_info do Vestibular Normal
+        // vest_info do Vestibular Normal 20150101
         String vest_info = "20150101";
         inscricoes = dao.inscritosVestibular(vest_info);
         return inscricoes;
@@ -205,6 +204,17 @@ public class MbInscVestibular implements Serializable {
     ////////////////////////////////////////////
     public void setInscricoes(List<Inscricao> inscricoes) {
         this.inscricoes = inscricoes;
+    }
+
+    //buscar quant.de inscritos do vestibular
+    public List getQuantIncritosVestibular() {
+        quantIncritosVestibular = dao.quantInscritosVestibular("20150101");
+        
+        return quantIncritosVestibular;
+    }
+
+    public void setQuantIncritosVestibular(List quantIncritosVestibular) {
+        this.quantIncritosVestibular = quantIncritosVestibular;
     }
 
     public Inscricao getInscricao() {

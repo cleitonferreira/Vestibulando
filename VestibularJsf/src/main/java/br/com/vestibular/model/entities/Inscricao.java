@@ -142,6 +142,10 @@ public class Inscricao implements Serializable {
     @ForeignKey(name = "FK_INCRICAO_RESPOSTA")
     private List<Resposta_Vestibular> resposta_vestibulares;
 
+    @OneToMany(mappedBy = "inscricao", fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_INCRICAO_BOLETO")
+    private List<Boleto> boletos;
+
     public Inscricao() {
         this.vestibular = new Vestibular();
         this.curso = new Curso();
@@ -463,10 +467,18 @@ public class Inscricao implements Serializable {
         this.resposta_vestibulares = resposta_vestibulares;
     }
 
+    public List<Boleto> getBoletos() {
+        return boletos;
+    }
+
+    public void setBoletos(List<Boleto> boletos) {
+        this.boletos = boletos;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (this.inscricao_id != null ? this.inscricao_id.hashCode() : 0);
+        int hash = 3;
+        hash = 71 * hash + (this.inscricao_id != null ? this.inscricao_id.hashCode() : 0);
         return hash;
     }
 

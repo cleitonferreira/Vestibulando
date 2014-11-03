@@ -57,18 +57,20 @@
 
 
         <!-- Menu ########################################## Menu-->
-        <!-- MENU USUARIO COMUM -->
+        <!-- MENU USUARIO COMUM USER-->
         <c:if test="${bbUsuarioLogado.procuraUsuario().getUsu_permissao() == 'ROLE_USER'}">  
-                        <div id="menu">
+            <div id="menu">
                 <h:form>    
                     <p:menubar styleClass="labelmenu">
                         <p:menuitem  value="Home" url="/principal/home.faces"/>
                         <p:submenu label="Consultas">
-                            <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
-                            <p:menuitem value="Usuarios" url="/restrict/consultas/consultarusuarios.faces"/>
-                            <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
-                            <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
-                            <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
+                            <p:menuitem value="Setores" url="/secret/consultas/consultarsetores.faces"/>
+                            <p:menuitem value="Paises" url="/secret/consultas/consultarpaises.faces"/>
+                            <p:menuitem value="Estados" url="/secret/consultas/consultarestados.faces"/>
+                            <p:menuitem value="Cidades" url="/secret/consultas/consultarcidades.faces"/>
+                        </p:submenu>
+                        <p:submenu label="Pagamento">
+                            <p:menuitem  value="Vestibular 2015" url="/secret/pagamentos/inscricoesvestibular.faces"/>
                         </p:submenu>
                         <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
 
@@ -76,7 +78,34 @@
                 </h:form>           
             </div>
         </c:if>
-        <!-- MENU USUARIO COMUM -->
+
+        <!-- MENU USUARIO SECRETARIA - SECRET -->
+        <c:if test="${bbUsuarioLogado.procuraUsuario().getUsu_permissao() == 'ROLE_SECRET'}">  
+            <div id="menu">
+                <h:form>    
+                    <p:menubar styleClass="labelmenu">
+                        <p:menuitem  value="Home" url="/principal/home.faces"/>
+                        <p:submenu label="Inscri&ccedil;&otilde;es">
+                            <p:menuitem  value="Vestibular" url="/secret/cadastros/vestibular.faces"/>
+                            <p:menuitem  value="Vestibular Medicina" url="/secret/cadastros/vestibularmedicina.faces"/>
+                        </p:submenu>
+                        <p:submenu label="Pagamento">
+                            <p:menuitem  value="Vestibular 2015" url="/secret/pagamentos/inscricoesvestibular.faces"/>
+                        </p:submenu>
+                        <p:submenu label="Consultas">
+                            <p:menuitem value="Setores" url="/secret/consultas/consultarsetores.faces"/>
+                            <p:menuitem value="Paises" url="/secret/consultas/consultarpaises.faces"/>
+                            <p:menuitem value="Estados" url="/secret/consultas/consultarestados.faces"/>
+                            <p:menuitem value="Cidades" url="/secret/consultas/consultarcidades.faces"/>
+                        </p:submenu>
+                        <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
+
+                    </p:menubar> 
+                </h:form>           
+            </div>
+        </c:if>
+
+        <!-- MENU USUARIO ADMINISTRADOR - RESTRICT -->
         <c:if test="${bbUsuarioLogado.procuraUsuario().getUsu_permissao() == 'ROLE_ADMIN'}">  
             <div id="menu">
                 <h:form>    
@@ -84,22 +113,22 @@
                         <p:menuitem  value="Home" url="/principal/home.faces"/>
                         <p:submenu label="Cadastros">
                             <p:menuitem  value="Setores" url="/restrict/cadastros/cadastrarsetor.faces"/>
-                            <p:menuitem  value="Usuarios" url="/restrict/cadastros/cadastrarusuario.faces"/>
                             <p:menuitem  value="Paises" url="/restrict/cadastros/cadastrarpais.faces"/>
                             <p:menuitem  value="Estados" url="/restrict/cadastros/cadastrarestado.faces"/>
                             <p:menuitem  value="Cidades" url="/restrict/cadastros/cadastrarcidade.faces"/>
                             <p:menuitem  value="Vestibular" url="/restrict/cadastros/cadastrarvestibular.faces"/>
                             <p:menuitem  value="Curso" url="/restrict/cadastros/cadastrarcurso.faces"/>
                             <p:menuitem  value="Loca de Prova" url="/restrict/cadastros/cadastrarlocalprova.faces"/>
-                            <p:menuitem  value="Arquivo de Retorno" url="/restrict/boletos/retornoupload.faces"/>
                         </p:submenu> 
                         <p:submenu label="Inscri&ccedil;&otilde;es">
                             <p:menuitem  value="Vestibular" url="/restrict/cadastros/vestibular.faces"/>
                             <p:menuitem  value="Vestibular Medicina" url="/restrict/cadastros/vestibularmedicina.faces"/>
                         </p:submenu>
+                        <p:submenu label="Pagamento">
+                            <p:menuitem  value="Vestibular 2015" url="/restrict/pagamentos/inscricoesvestibular.faces"/>
+                        </p:submenu>
                         <p:submenu label="Consultas">
                             <p:menuitem value="Setores" url="/restrict/consultas/consultarsetores.faces"/>
-                            <p:menuitem value="Usuarios" url="/restrict/boletos/consultarusuarios.faces"/>
                             <p:menuitem value="Paises" url="/restrict/consultas/consultarpaises.faces"/>
                             <p:menuitem value="Estados" url="/restrict/consultas/consultarestados.faces"/>
                             <p:menuitem value="Cidades" url="/restrict/consultas/consultarcidades.faces"/>
@@ -111,6 +140,50 @@
                 </h:form>           
             </div>
         </c:if> 
+
+        <!-- MENU USUARIO DESENVOLVEDOR -->
+        <c:if test="${bbUsuarioLogado.procuraUsuario().getUsu_email() == 'cleitonferreiraa@hotmail.com' || bbUsuarioLogado.procuraUsuario().getUsu_email() == 'magno_fernandes90@hotmail.com'}">  
+            <div id="menu">
+                <h:form>    
+                    <p:menubar styleClass="labelmenu">
+                        <p:menuitem  value="Home" url="/principal/home.faces"/>
+                        <p:submenu label="Cadastros">
+                            <p:menuitem  value="Setores" url="/security/cadastros/cadastrarsetor.faces"/>
+                            <p:menuitem  value="Usuarios" url="/security/cadastros/cadastrarusuario.faces"/>
+                            <p:menuitem  value="Paises" url="/security/cadastros/cadastrarpais.faces"/>
+                            <p:menuitem  value="Estados" url="/security/cadastros/cadastrarestado.faces"/>
+                            <p:menuitem  value="Cidades" url="/security/cadastros/cadastrarcidade.faces"/>
+                            <p:menuitem  value="Vestibular" url="/security/cadastros/cadastrarvestibular.faces"/>
+                            <p:menuitem  value="Curso" url="/security/cadastros/cadastrarcurso.faces"/>
+                            <p:menuitem  value="Loca de Prova" url="/security/cadastros/cadastrarlocalprova.faces"/>
+                            <p:menuitem  value="Arquivo de Retorno" url="/security/boletos/retornoupload.faces"/>
+                        </p:submenu> 
+                        <p:submenu label="Inscri&ccedil;&otilde;es">
+                            <p:menuitem  value="Vestibular" url="/security/cadastros/vestibular.faces"/>
+                            <p:menuitem  value="Vestibular Medicina" url="/security/cadastros/vestibularmedicina.faces"/>
+                        </p:submenu>
+                        <p:submenu label="Pagamento">
+                            <p:menuitem  value="Vestibular" url="/security/pagamentos/inscricoesvestibular.faces"/>
+                        </p:submenu>
+                        <p:submenu label="Consultas">
+                            <p:menuitem value="Setores" url="/security/consultas/consultarsetores.faces"/>
+                            <p:menuitem value="Usuarios" url="/security/boletos/consultarusuarios.faces"/>
+                            <p:menuitem value="Paises" url="/security/consultas/consultarpaises.faces"/>
+                            <p:menuitem value="Estados" url="/security/consultas/consultarestados.faces"/>
+                            <p:menuitem value="Cidades" url="/security/consultas/consultarcidades.faces"/>
+                            <p:menuitem value="Boletos" url="/security/boletos/consultarboletos.faces"/>
+                        </p:submenu>
+                        <p:menuitem  value="Equipe" onclick="PF('dlg3').show();" />
+
+                    </p:menubar> 
+                </h:form>           
+            </div>
+        </c:if> 
+
+
+
+
+
 
 
         <div id="tarefas">

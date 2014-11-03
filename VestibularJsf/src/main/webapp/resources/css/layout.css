@@ -9,7 +9,8 @@ body {
 }
 
 /*o tamanho da fonte de todas as paginas*/
-.ui-widget .ui-widget{font-size: 12px;}
+.ui-widget .ui-widget{font-size: 10px;}
+.ui-widget{font-size: 10px;}/*esse tag é para font das páginas de consulta*/
 
 
 

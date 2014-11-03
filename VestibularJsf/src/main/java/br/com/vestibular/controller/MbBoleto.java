@@ -7,6 +7,7 @@ package br.com.vestibular.controller;
 
 import br.com.vestibular.model.dao.HibernateDAO;
 import br.com.vestibular.model.dao.InterfaceDAO;
+import br.com.vestibular.model.dao.MeuDaoImpl;
 import br.com.vestibular.model.entities.Boleto;
 import br.com.vestibular.util.FacesContextUtil;
 import java.io.Serializable;
@@ -26,8 +27,11 @@ public class MbBoleto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final MeuDaoImpl dao = new MeuDaoImpl();
+
     private Boleto boleto = new Boleto();
     private List<Boleto> boletos;
+    private List viewTotalInscritos;
     private List<Boleto> filteredBoletos;
     private List<Boleto> consultaBoletos;
 
@@ -39,65 +43,13 @@ public class MbBoleto implements Serializable {
         return boletoDAO;
     }
 
-    public String limpBoleto() {
-        boleto = new Boleto();
-        return editBoleto();
+    public List getViewTotalInscritos() {
+        viewTotalInscritos = dao.viewTotalInscritosBD();
+        return viewTotalInscritos;
     }
 
-    public String editBoleto() {
-        return "/restrict/cadastros/cadastrarboleto.faces";
-    }
-
-    public String addBoleto() {
-        // verifica a id veio igual a null ou id igual a 0
-        if (boleto.getBoleto_id() == null || boleto.getBoleto_id() == 0) {
-            insertBoleto();
-        } else {
-            updateBoleto();
-        }
-        limpBoleto();
-        return null;
-    }
-
-    private void insertBoleto() {
-        try {
-            boletoDAO().save(boleto);
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
-        } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Cadastrar],  no Banco de Dados", "" + ex));
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
-        }
-
-    }
-
-    private void updateBoleto() {
-        try {
-            boletoDAO().update(boleto);
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
-        } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Atualizar], no Banco de Dados", "" + ex));
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
-        }
-
-    }
-
-    public void deleteBoleto() {
-        try {
-            boletoDAO().remove(boleto);
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso", ""));
-        } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao [Excluir], no Banco de Dados", "" + ex));
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Entre em contato com o Administrador", "" + ex));
-        }
+    public void setViewTotalInscritos(List viewTotalInscritos) {
+        this.viewTotalInscritos = viewTotalInscritos;
     }
 
     public List<Boleto> getBoletos() {
@@ -134,4 +86,3 @@ public class MbBoleto implements Serializable {
     }
 
 }
-

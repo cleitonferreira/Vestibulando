@@ -18,6 +18,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 /**
  *
@@ -159,7 +160,7 @@ public class MeuDaoImpl implements MeuDao, Serializable {
     public List<Inscricao> inscritosVestibularMedicina(String vest_info) {
         Criteria crit = FacesContextUtil.getRequestSession().createCriteria(Inscricao.class).createCriteria("vestibular");
         String var = "%" + vest_info + "%";
-        crit.add(Restrictions.eq("vestibular_info", var));
+        crit.add(Restrictions.ilike("vestibular_info", var));
 
 //        chave estrangeira criteria
 //        http://www.mballem.com/post/consultas-com-hibernate-e-a-api-criteria-parte-ii
@@ -172,6 +173,28 @@ public class MeuDaoImpl implements MeuDao, Serializable {
         String var = "%" + vest_info + "%";
         crit.add(Restrictions.ilike("vestibular_info", var));
         return crit.list();
+    }
+
+    @Override
+    public List quantInscritosVestibular(String vest_info) {
+        SQLQuery sql = FacesContextUtil.getRequestSession().createSQLQuery("SELECT CURSO,\n"
+                + "CONCAT('Total: ',VW_INSCRITOS) AS VW_INSCRITOS\n"
+                + "FROM VW_TOTAL_INSCRITOS_VEST_20150101 WHERE VESTIBULAR_INFO = "+vest_info);
+
+        sql.setResultTransformer(Transformers.TO_LIST);
+
+//        List results = sql.list();
+//        System.out.println("Qaunt.>>>>>>>>>>>>>>>>>>>>>>>" + results.toString());
+        return sql.list();
+    }
+
+    @Override
+    public List viewTotalInscritosBD() {
+        SQLQuery sql = FacesContextUtil.getRequestSession().createSQLQuery("SELECT CURSO, VW_PAGO, VW_ABERTO, VW_INSCRITOS FROM VW_TOTAL_INSCRITOS_VEST_20150101");
+
+//        System.out.println("Sql"+sql);
+        sql.setResultTransformer(Transformers.TO_LIST);
+        return sql.list();
     }
 
 }

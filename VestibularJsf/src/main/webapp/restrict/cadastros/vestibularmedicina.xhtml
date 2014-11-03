@@ -63,16 +63,33 @@
 
                         <p:button style="margin-left: 10px;" outcome="vestibularmedicina" value="Limpar Formul&aacute;rio" icon="ui-icon-star" />
 
+                        <p:button style="margin-left: 10px;" outcome="vestibularmedicina" href="http://187.102.200.134:58180/vestibularMedicina/boleto.php" target="_blank" value="Boleto" icon="ui-icon-star" />
+
                         <br /><br />
-                        <small style="font-weight: bold;">Perfil: Funcion&aacute;rio[FC] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Professor[PF] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Aluno[AL] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Visitante[VS] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <small style="font-weight: bold;">
+
+                            <style>
+                                .semBorda tr, .semBorda td {  
+                                    border: none !important;  
+                                }
+
+                            </style>
+
+                            <p:panelGrid columns="2" styleClass="semBorda">
+                                <p:outputLabel value="Curso" style="font-weight: bold;"/>
+                                <p:outputLabel value="Total de Inscritos" style="font-weight: bold;"/>
+                                <c:forEach items="${mbInscVestibularMed.quantIncritosVestibular}" var="quantIncritosVestibular">
+                                    <p:outputLabel value="#{quantIncritosVestibular.get(0)}" />
+                                    <p:outputLabel value="#{quantIncritosVestibular.get(1)}" />
+                                </c:forEach>
+                            </p:panelGrid>
+
+
                         </small>
 
 
                         <div align="center">
-                            <p:dialog header="View Inscri&ccedil;&atilde;o" widgetVar="viewInscricao" minimizable="true" maximizable="true" focus="inscricao_nome" width="70%">
+                            <p:dialog header="View Inscri&ccedil;&otilde;es Vestibular Medicina 2015" widgetVar="viewInscricao" minimizable="true" maximizable="true" focus="inscricao_nome" width="70%">
 
 
                                 <p:outputLabel/>
@@ -240,7 +257,7 @@
 
                                 </h:panelGrid>
                                 <p:panel style="text-align: center">
-                                    <p:commandButton value="Salvar" action="#{mbInscVestibularMed.addInscricao}" onclick="PF('notificacao').hide()"
+                                    <p:commandButton value="Salvar" action="#{mbInscVestibularMed.addInscricao}"
                                                      image="ui-icon ui-icon-disk" update="@form :formtable"/>
                                     <p:commandButton value="Limpar" disabled="#{mbInscVestibularMed.inscricao.inscricao_id != null}" >
                                         <p:ajax update="panel" resetValues="true" />
@@ -249,20 +266,188 @@
                             </p:dialog>
                         </div>
                     </h:form>
+
+
+                    <!-- Segundo Formulário - por causa do preenchimento do combo de Estado e Cidade-->
+
+                    <h:form prependId="false" id="formInscricao2">
+
+                        <div align="center">
+                            <p:dialog header="View Inscri&ccedil;&otilde;es Vestibular Medicina 2015" widgetVar="viewInscricaoUpdate" minimizable="true" maximizable="true" focus="inscricao_nome" width="70%">
+
+                                <p:outputLabel/>
+                                <h:inputHidden id="inscricao_id" value="#{mbInscVestibularMed.inscricao.inscricao_id}"/>
+
+
+                                <h:panelGrid id="panel2" columns="6" cellpadding="8">
+                                    <p:outputLabel value="Vestibular*" />
+                                    <p:selectOneMenu id="vestibular" value="#{mbInscVestibularMed.vestibular}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Vestibular] &eacute; obrigat&oacute;rio"
+                                                     converter="converterVestibular">
+
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibularMed.vestibulares}" var="vestibular" itemValue="#{vestibular}" itemLabel="#{vestibular.vestibular_descricao}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="1&#176; op&ccedil;&atilde;o de Curso.:" />
+                                    <p:selectOneMenu id="curso" value="#{mbInscVestibularMed.curso}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Curso] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterCurso"  >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibularMed.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.curso_nome}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="2&#176; op&ccedil;&atilde;o de Curso.:" />
+                                    <p:selectOneMenu id="curso2" value="#{mbInscVestibularMed.curso2}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Curso2] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterCurso"  >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibularMed.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.curso_nome}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="Local da Prova.:" />
+                                    <p:selectOneMenu id="local_prova" value="#{mbInscVestibularMed.local_prova}" style="width:220px"
+                                                     required="true" requiredMessage="O campo [Local da Prova] &eacute; obrigat&oacute;rio" 
+                                                     converter="converterLocal_Prova"  >
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{mbInscVestibularMed.local_provas}" var="local_prova" itemValue="#{local_prova}" itemLabel="#{local_prova.prova_cidade}" />
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="Nome.:"/>
+                                    <p:inputText id="inscricao_nome" size="40" maxlength="80" value="#{mbInscVestibularMed.inscricao.inscricao_nome}"
+                                                 required="true" requiredMessage="O campo [Nome] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+
+                                    <p:outputLabel value="CPF.:"/>
+                                    <p:inputMask id="inscricao_cpf" size="40" maxlength="14" mask="999.999.999-99" value="#{mbInscVestibularMed.inscricao.inscricao_cpf}"
+                                                 disabled="#{mbInscVestibularMed.inscricao.inscricao_cpf != null}" required="true" requiredMessage="O campo [CPF] &eacute; obrigat&oacute;rio">
+                                        <f:validator validatorId="validators.CPFValidator"/> 
+                                        <f:converter converterId="converter.CpfConverter" />
+                                    </p:inputMask>
+
+
+                                    <p:outputLabel value="RG.:"/>
+                                    <p:inputText id="inscricao_rg" size="40" maxlength="20" value="#{mbInscVestibularMed.inscricao.inscricao_rg}"
+                                                 required="true" requiredMessage="O campo [RG] &eacute; obrigat&oacute;rio">
+                                    </p:inputText>
+
+
+                                    <p:outputLabel value="&Oacute;rg&atilde;o Expedidor.:"/>
+                                    <p:inputText id="inscricao_oe" size="40" maxlength="20" value="#{mbInscVestibularMed.inscricao.inscricao_oe}"
+                                                 onkeyup="this.value = this.value.toUpperCase()" required="true" 
+                                                 requiredMessage="O campo [&Oacute;rg&atilde;o Expedidor] &eacute; obrigat&oacute;rio">
+                                    </p:inputText>
+
+
+                                    <p:outputLabel value="Data de Nascimento.:" />
+                                    <p:calendar id="inscricao_datanasc" value="#{mbInscVestibularMed.inscricao.inscricao_datanasc}" 
+                                                locale="pt" pattern="dd-MM-yyyy" mask="true" />
+
+
+                                    <h:outputText value="Sexo.:" />
+                                    <p:selectOneButton value="#{mbInscVestibularMed.inscricao.inscricao_sexo}">
+                                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                    </p:selectOneButton>
+
+
+                                    <p:outputLabel value="Endere&ccedil;o.:"/>
+                                    <p:inputText id="inscricao_endereco" size="40" maxlength="80" value="#{mbInscVestibularMed.inscricao.inscricao_endereco}"
+                                                 required="true" requiredMessage="O campo [Endere&ccedil;o] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+                                    <p:outputLabel value="Bairro.:"/>
+                                    <p:inputText id="inscricao_bairro" size="40" maxlength="80" value="#{mbInscVestibularMed.inscricao.inscricao_bairro}"
+                                                 required="true" requiredMessage="O campo [Bairro] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+
+                                    <p:outputLabel value="Cep.:"/>
+                                    <p:inputMask id="inscricao_cep" size="40" maxlength="10" mask="99999-999"
+                                                 value="#{mbInscVestibularMed.inscricao.inscricao_cep}" />
+
+
+                                    <p:outputLabel value="Telefone.:"/>
+                                    <p:inputMask id="inscricao_tel" size="40" maxlength="14" mask="(99) 9999-9999"
+                                                 value="#{mbInscVestibularMed.inscricao.inscricao_tel}" />
+
+                                    <p:outputLabel value="Celular.:"/>
+                                    <p:inputMask id="inscricao_cel" size="40" maxlength="15" mask="(99) 9999-9999?9"
+                                                 value="#{mbInscVestibularMed.inscricao.inscricao_cel}" />
+
+                                    <p:outputLabel value="E-mail.:"/>
+                                    <p:inputText id="inscricao_email" size="40" maxlength="80" value="#{mbInscVestibularMed.inscricao.inscricao_email}"
+                                                 onkeyup="this.value = this.value.toLowerCase()" required="true"
+                                                 requiredMessage="O campo [Email] &eacute; obrigat&oacute;rio.">
+                                        <f:validator validatorId="emailValidator"/>
+                                    </p:inputText>
+
+
+                                    <h:outputText value="Enem.:" />
+                                    <p:selectOneButton id="inscricao_enem" value="#{mbInscVestibularMed.inscricao.inscricao_enem}">
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
+                                    </p:selectOneButton>
+
+
+                                    <h:outputText value="Escreve com a m&atilde;o.:" />
+                                    <p:selectOneButton id="inscricao_escreve_mao" value="#{mbInscVestibularMed.inscricao.inscricao_escreve_mao}">
+                                        <f:selectItem itemLabel="Esquerda" itemValue="E" />
+                                        <f:selectItem itemLabel="Direita" itemValue="D" />
+                                    </p:selectOneButton>
+
+
+                                    <p:outputLabel value="Portador de Necessidade Especial.:" />
+                                    <p:selectOneRadio id="inscricao_portador_especial" value="#{mbInscVestibularMed.inscricao.inscricao_portador_especial}">
+                                        <f:selectItem itemLabel="N&atilde;o" itemValue="0" />
+                                        <f:selectItem itemLabel="Sim" itemValue="1" />
+                                    </p:selectOneRadio>
+
+                                    <p:outputLabel value="Necessidade Especial.:"/>
+                                    <p:inputText id="inscricao_portador_descricao" size="40" maxlength="80" 
+                                                 value="#{mbInscVestibularMed.inscricao.inscricao_portador_descricao}" />
+
+
+                                    <p:outputLabel value="Escola(Ensino M&eacute;dio).:"/>
+                                    <p:inputText id="inscricao_escola" size="40" maxlength="80" value="#{mbInscVestibularMed.inscricao.inscricao_escola}"
+                                                 required="true" requiredMessage="O campo [Escola(Ensino M&eacute;dio)] &eacute; obrigat&oacute;rio"
+                                                 onkeyup="this.value = this.value.toUpperCase()"/>
+
+
+
+                                </h:panelGrid>
+                                <p:panel style="text-align: center">
+                                    <p:commandButton value="Salvar" action="#{mbInscVestibularMed.addInscricao}"
+                                                     image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Limpar" disabled="#{mbInscVestibularMed.inscricao.inscricao_id != null}" >
+                                        <p:ajax update="panel2" resetValues="true" />
+                                    </p:commandButton>
+                                </p:panel>
+
+
+                            </p:dialog>
+                        </div>
+                    </h:form>
+
+
+
+
                 </p:tab>
             </p:tabView>
 
-            <style>
-                .ui-notificationbar{
-                    height: 2%;
-                }
-            </style>
 
-            <p:notificationBar position="top" effect="slide" widgetVar="notificacao">
-                <h:outputText value="Por Favor, pressione o bot&atilde;o [Editar] 2 vezes para o carregamento das informa&ccedil;&otilde;es!" style="font-size:15px;" />
-            </p:notificationBar>
 
-            <!--            <p:commandButton value="Fechar a Notifica&ccedil;&atilde;o" onclick="PF('notificacao').hide()" type="button" icon="ui-icon-arrow-1-n"/>-->
+
+
+
+
+
+
 
 
             <h:form id="formtable">
@@ -283,11 +468,8 @@
                     <p:column headerText="Curso 1" filterBy="#{inscricao.curso.curso_nome}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.curso.curso_nome}"/>
                     </p:column>
-                    <p:column headerText="Curso 2" filterBy="#{inscricao.curso2.curso_nome}"  footerText="contains" filterMatchMode="contains">
-                        <h:outputText value="#{inscricao.curso2.curso_nome}"/>
-                    </p:column>
-                    <p:column headerText="Estado" filterBy="#{inscricao.estado.est_nome}"  footerText="contains" filterMatchMode="contains">
-                        <h:outputText value="#{inscricao.estado.est_nome}"/>
+                    <p:column headerText="Estado" filterBy="#{inscricao.estado.est_uf}"  footerText="contains" filterMatchMode="contains" style="width: 5%;">
+                        <h:outputText value="#{inscricao.estado.est_uf}"/>
                     </p:column>
                     <p:column headerText="Cidade" filterBy="#{inscricao.cidade.cid_nome}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.cidade.cid_nome}"/>
@@ -295,11 +477,14 @@
                     <p:column headerText="Local da Prova" filterBy="#{inscricao.local_prova.prova_cidade}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.local_prova.prova_cidade}"/>
                     </p:column>
-                    <p:column headerText="Nome" filterBy="#{inscricao.inscricao_nome}"  footerText="contains" filterMatchMode="contains">
+                    <p:column headerText="Nome" filterBy="#{inscricao.inscricao_nome}" style="width: 18%;" footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.inscricao_nome}"/>
                     </p:column>
                     <p:column headerText="Cpf" filterBy="#{inscricao.inscricao_cpf}"  footerText="contains" filterMatchMode="contains">
                         <h:outputText value="#{inscricao.inscricao_cpf}"/>
+                    </p:column>
+                    <p:column headerText="Enem" filterBy="#{inscricao.inscricao_enem == '1' ? 'Sim' : 'N&atilde;o'}"  footerText="contains" filterMatchMode="contains">
+                        <h:outputText value="#{inscricao.inscricao_enem == '1' ? 'Sim' : 'N&atilde;o'}"/>
                     </p:column>
 
 
@@ -308,17 +493,13 @@
                         <f:facet name="header">
                             <h:outputText value="A&ccedil;&otilde;es"/>
                         </f:facet>
-                        <p:commandButton update=":tbv1:formInscricao" oncomplete="PF('viewInscricao').show();" 
-                                         onclick="PF('notificacao').show()"
+                        <p:commandButton oncomplete="PF('viewInscricaoUpdate').show();" update=":tbv1:formInscricao2"
                                          image="ui-icon ui-icon-pencil" value="Editar">
                             <f:setPropertyActionListener target="#{mbInscVestibularMed.inscricao}" value="#{inscricao}"/>
                             <f:setPropertyActionListener target="#{mbInscVestibularMed.vestibular}" value="#{inscricao.vestibular}" />
                             <f:setPropertyActionListener target="#{mbInscVestibularMed.curso}" value="#{inscricao.curso}" />
                             <f:setPropertyActionListener target="#{mbInscVestibularMed.curso2}" value="#{inscricao.curso2}" />
                             <f:setPropertyActionListener target="#{mbInscVestibularMed.local_prova}" value="#{inscricao.local_prova}" />
-                            <p:ajax update=":tbv1:formInscricao:cidade" listener="#{mbInscVestibularMed.listaCidades}"/>
-                            <f:setPropertyActionListener target="#{mbInscVestibularMed.estado}" value="#{inscricao.estado}" />
-                            <f:setPropertyActionListener target="#{mbInscVestibularMed.cidade}" value="#{inscricao.cidade}" />
                         </p:commandButton>
 
                         <!--                         Excluir -->

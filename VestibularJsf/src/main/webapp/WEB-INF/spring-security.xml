@@ -10,7 +10,10 @@
         <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/public/login.faces" access="permitAll" />
         <intercept-url pattern="/principal/**" access="isAuthenticated()" />
-        <intercept-url pattern="/restrict/**" access="hasRole('ROLE_ADMIN')" />
+<!--        <intercept-url pattern="/restrict/**" access="hasRole('ROLE_ADMIN')" />-->
+        <intercept-url pattern="/security/**" access="hasRole('ROLE_DESENV')" />
+        <intercept-url pattern="/restrict/**" access="hasAnyRole('ROLE_DESENV','ROLE_ADMIN')" />
+        <intercept-url pattern="/secret/**" access="hasAnyRole('ROLE_DESENV','ROLE_SECRET','ROLE_USER')" />
 <!--        <intercept-url pattern="/restrict/**" access="permitAll" />-->
         <intercept-url pattern="/public/**" access="permitAll"/>
     
@@ -30,10 +33,13 @@
     </authentication-manager>
     
     <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <b:property name="url" value="jdbc:mysql://localhost:3306/vestibular" />
+        <b:property name="url" value="jdbc:mysql://192.168.254.21:3306/vestibular" />
+<!--        <b:property name="url" value="jdbc:mysql://localhost/vestibular" />-->
         <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <b:property name="username" value="admin" />
-        <b:property name="password" value="admin" />
+        <b:property name="username" value="vestsisuser" />
+        <b:property name="password" value="HBfFUDqh5dr7qvAf" />
+<!--        <b:property name="username" value="admin" />
+        <b:property name="password" value="admin" />-->
     </b:bean>
     
     <!-- MAS EXISTEM OUTRAS 2 FORMAS DE SE FAZER ISSO -->

@@ -6,21 +6,28 @@
     <session-factory name="session">
         
         <!-- CONFIGURAÇÕES DE CONEXÃO COM O BD -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> <!--Defino o driver de conexão com o bd -->
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.254.21:3306/vestibular?createDatabaseIfNotExist=true</property>
+        <property name="hibernate.connection.username">vestsisuser</property>
+        <property name="hibernate.connection.password">HBfFUDqh5dr7qvAf</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property><!-- Defino o driver de conexão com o bd -->
+        <!-- CONFIGURAÇÕES DE CONEXÃO COM O BD LOCAL HOST-->
+<!--        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> Defino o driver de conexão com o bd 
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vestibular?createDatabaseIfNotExist=true</property>
         <property name="hibernate.connection.username">admin</property>
         <property name="hibernate.connection.password">admin</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>-->
+            
+        
         
         <!-- HABILITA A EXIBIÇÃO DO SQL GERADO PELO HIBERNATE E FORMATA-O -->
         
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">false</property>
         
-        <!-- HABILITA A ATUALIZAÇÃO AUTOMÁTICA DA ESTRUTURA DE TABELAS PELO HIBERNATE -->
-        
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- NÃO UTILIZAR A ATUALIZAÇÃO AUTOMÁTICA DA ESTRUTURA DE TABELAS PELO HIBERNATE -->
+        <!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
         
         <!-- Tratamento de Cache dos Objetos-->
         <property name="hibernate.cache.use_query_cache">false</property>

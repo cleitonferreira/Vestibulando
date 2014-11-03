@@ -80,7 +80,7 @@ public class MbUsuario implements Serializable {
         try {
             usuario.setSetor(setor);
             usuario.setUsu_senha(ConverterSHA1.cipher(usuario.getUsu_senha()));
-//            usuario.setUsu_permissao("ROLE_ADMIN");
+            usuario.setUsu_permissao("ROLE_ADMIN");
             usuarioDAO().save(usuario);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
@@ -97,7 +97,7 @@ public class MbUsuario implements Serializable {
         try {
             usuario.setSetor(setor);
             usuario.setUsu_senha(ConverterSHA1.cipher(usuario.getUsu_senha()));
-//            usuario.setUsu_permissao("ROLE_ADMIN");
+            usuario.setUsu_permissao("ROLE_ADMIN");
             usuarioDAO().update(usuario);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));

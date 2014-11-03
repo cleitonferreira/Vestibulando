@@ -33,8 +33,8 @@ public class Boleto implements Serializable {
     @GeneratedValue
     @Column(name = "BOLETO_ID", nullable = false)
     private Integer boleto_id;
-    @Column(name = "INSCRICAO_ID", nullable = true, length = 20)
-    private Long inscricao_id;
+//    @Column(name = "INSCRICAO_ID", nullable = true, length = 20)
+//    private Long inscricao_id;
     @Column(name = "BOLETO_DT_VENC", nullable = true, length = 10)
     private String boleto_dt_venc;
     @Column(name = "BOLETO_VL_BOLETO", nullable = true, precision = 10, scale = 2)
@@ -73,8 +73,14 @@ public class Boleto implements Serializable {
     @JoinColumn(name = "VESTIBULAR_INFO", referencedColumnName = "vestibular_info")
     private Vestibular vestibular;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_INCRICAO_BOLETO")
+    @JoinColumn(name = "INSCRICAO_ID", referencedColumnName = "inscricao_id")
+    private Inscricao inscricao;
+
     public Boleto() {
         this.vestibular = new Vestibular();
+        this.inscricao = new Inscricao();
     }
 
     public Integer getBoleto_id() {
@@ -85,13 +91,13 @@ public class Boleto implements Serializable {
         this.boleto_id = boleto_id;
     }
 
-    public Long getInscricao_id() {
-        return inscricao_id;
-    }
-
-    public void setInscricao_id(Long inscricao_id) {
-        this.inscricao_id = inscricao_id;
-    }
+//    public Long getInscricao_id() {
+//        return inscricao_id;
+//    }
+//
+//    public void setInscricao_id(Long inscricao_id) {
+//        this.inscricao_id = inscricao_id;
+//    }
 
     public String getBoleto_dt_venc() {
         return boleto_dt_venc;
@@ -213,6 +219,14 @@ public class Boleto implements Serializable {
         this.vestibular = vestibular;
     }
 
+    public Inscricao getInscricao() {
+        return inscricao;
+    }
+
+    public void setInscricao(Inscricao inscricao) {
+        this.inscricao = inscricao;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -234,7 +248,5 @@ public class Boleto implements Serializable {
         }
         return true;
     }
-
-    
 
 }

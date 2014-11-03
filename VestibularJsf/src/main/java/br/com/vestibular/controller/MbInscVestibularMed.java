@@ -36,6 +36,7 @@ public class MbInscVestibularMed implements Serializable {
 
     private Inscricao inscricao = new Inscricao();
     private List<Inscricao> inscricoes;
+    private List quantIncritosVestibular;
     private List<Inscricao> filteredInscricoes;
     private List<Inscricao> consultaInscricoes;
 
@@ -99,7 +100,7 @@ public class MbInscVestibularMed implements Serializable {
     public String addInscricao() {
 
         String cpf = inscricao.getInscricao_cpf();
-        String vestinfo = vestibular.getVestibular_info().toString();
+        String vestinfo = vestibular.getVestibular_info();
         Object resultado = dao.consultaCpf(cpf, vestinfo);
         //System.out.println("Resultado >>>>" + resultado.toString());
 
@@ -163,8 +164,6 @@ public class MbInscVestibularMed implements Serializable {
             inscricao.setCurso(curso);
             inscricao.setCurso2(curso2);
             inscricao.setLocal_prova(local_prova);
-            inscricao.setEstado(estado);
-            inscricao.setCidade(cidade);
             inscricaoDAO().update(inscricao);
 
             FacesContext.getCurrentInstance().addMessage(null,
@@ -195,7 +194,7 @@ public class MbInscVestibularMed implements Serializable {
     //realizar as modificações.
     public List<Inscricao> getInscricoes() {
         // vest_info do vestibular da Medicina
-        String vest_info = "'20140103'";
+        String vest_info = "20150102";
         inscricoes = dao.inscritosVestibularMedicina(vest_info);
         return inscricoes;
     }
@@ -203,6 +202,16 @@ public class MbInscVestibularMed implements Serializable {
     ////////////////////////////////////////////
     public void setInscricoes(List<Inscricao> inscricoes) {
         this.inscricoes = inscricoes;
+    }
+
+    //buscar quant.de inscritos do vestibular medicina
+    public List getQuantIncritosVestibular() {
+        quantIncritosVestibular = dao.quantInscritosVestibular("20150102");
+        return quantIncritosVestibular;
+    }
+
+    public void setQuantIncritosVestibular(List quantIncritosVestibular) {
+        this.quantIncritosVestibular = quantIncritosVestibular;
     }
 
     public Inscricao getInscricao() {

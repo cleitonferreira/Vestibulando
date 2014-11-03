@@ -58,7 +58,6 @@ public interface MeuDao {
 //    public Curso getByIdCurso2(Integer id);
 //
 //    public List<Curso> consultaTodosCursos2();
-
     //Local Prova
     public Local_Prova getByIdLocal_Prova(Integer id);
 
@@ -67,7 +66,12 @@ public interface MeuDao {
 //  Vestibular Medicina
     public List<Inscricao> inscritosVestibularMedicina(String vest_info);
 
-    //  Vestibular
+    // Vestibular
     public List<Inscricao> inscritosVestibular(String vest_info);
 
+    //Buscar quant. de inscritos no vestibular 20150101
+    public List quantInscritosVestibular(String vest_info);
+
+    //Buscar os registros da view VW_TOTAL_INSCRITOS_VEST_20150101`
+    public List viewTotalInscritosBD();
 }
