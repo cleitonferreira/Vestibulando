@@ -22,7 +22,7 @@
         <access-denied-handler error-page="/public/acessonegado.faces" />
     </http>                
 
-    <!-- NO PROJETO SEMERU PADRÃO FIZEMOS DESSA FORMA -->  
+    <!-- NO PROJETO SEMERU PADRÃƒO FIZEMOS DESSA FORMA -->  
     <authentication-manager>
         <authentication-provider>
             <password-encoder hash="sha"/>
@@ -33,23 +33,23 @@
     </authentication-manager>
     
     <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <b:property name="url" value="jdbc:mysql://192.168.254.21:3306/vestibular" />
+        <b:property name="url" value="jdbc:mysql://localhost/vestibular" />
 <!--        <b:property name="url" value="jdbc:mysql://localhost/vestibular" />-->
         <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <b:property name="username" value="vestsisuser" />
-        <b:property name="password" value="HBfFUDqh5dr7qvAf" />
+        <b:property name="username" value="admin" />
+        <b:property name="password" value="admin" />
 <!--        <b:property name="username" value="admin" />
         <b:property name="password" value="admin" />-->
     </b:bean>
     
     <!-- MAS EXISTEM OUTRAS 2 FORMAS DE SE FAZER ISSO -->
-    <!-- VOCÊ PODE CUSTOMIZAR A AUTENTICATION PROVIDER -->
+    <!-- VOCÃŠ PODE CUSTOMIZAR A AUTENTICATION PROVIDER -->
     <!--    <b:bean id="customAuthenticationProvider" class="br.com.semeru.security.CustomAuthenticationProvider"></b:bean> 
     <authentication-manager> 
         <authentication-provider ref="customAuthenticationProvider"/> 
     </authentication-manager>     -->
     
-    <!-- OU VOCÊ PODE AINDA CUSTOMIZAR A USER DETAILS -->
+    <!-- OU VOCÃŠ PODE AINDA CUSTOMIZAR A USER DETAILS -->
 <!--    <b:bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
     <authentication-manager>
         <authentication-provider user-service-ref="semeruUserService" >
