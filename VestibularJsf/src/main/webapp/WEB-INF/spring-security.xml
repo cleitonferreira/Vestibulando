@@ -33,11 +33,11 @@
     </authentication-manager>
     
     <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <b:property name="url" value="jdbc:mysql://192.168.254.21:3306/vestibular" />
+        <b:property name="url" value="jdbc:mysql://localhost/vestibular" />
 <!--        <b:property name="url" value="jdbc:mysql://localhost/vestibular" />-->
         <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <b:property name="username" value="vestsisuser" />
-        <b:property name="password" value="HBfFUDqh5dr7qvAf" />
+        <b:property name="username" value="admin" />
+        <b:property name="password" value="admin" />
 <!--        <b:property name="username" value="admin" />
         <b:property name="password" value="admin" />-->
     </b:bean>
